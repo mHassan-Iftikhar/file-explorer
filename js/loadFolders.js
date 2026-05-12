@@ -5,7 +5,12 @@ function loadFolders() {
     contentGrid.innerHTML = "";
 
     folders.forEach(folder => {
-        const folderDiv = document.createElement("div");
+        foldi(folder);
+    });
+}
+
+export function foldi(folder) {
+    const folderDiv = document.createElement("div");
         folderDiv.className = "folder-item";
         folderDiv.dataset.folderId = folder.id;
 
@@ -19,7 +24,6 @@ function loadFolders() {
         `;
 
         contentGrid.appendChild(folderDiv);
-    });
 }
 
 window.addEventListener("DOMContentLoaded", loadFolders);

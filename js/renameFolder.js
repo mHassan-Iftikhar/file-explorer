@@ -10,14 +10,15 @@ function toastMessage(msg, type) {
   div.style.position = "fixed";
   div.style.top = "10px";
   div.style.right = "10px";
-  div.style.background   = type === "success" ? "#0078d4" : "#e8e8e8";
+  div.style.background = type === "success" ? "#0078d4" : "#e8e8e8";
   div.style.borderRadius = "10px";
   div.style.border = "none";
   document.body.appendChild(div);
 
   setTimeout(() => {
     div.remove();
-  }, 3000);
+    location.reload();
+  }, 2000);
 }
 
 contentGrid.addEventListener("click", (e) => {
@@ -30,9 +31,12 @@ contentGrid.addEventListener("click", (e) => {
   const folderItem = e.target.closest(".folder-item");
   if (!folderItem) return;
 
+  const contextMenu = folderItem.querySelector(".context-menu");
+  if (contextMenu) contextMenu.style.display = "none";
+
   const input = folderItem.querySelector(".folder-item__name");
   input.contentEditable = true;
-
+  
   input.classList.add("rename-mode");
   input.focus();
 
@@ -49,13 +53,12 @@ contentGrid.addEventListener("click", (e) => {
       e.stopPropagation();
 
       let newName = input.textContent.trim();
-      folders.map((e) => {
-        if (e.name === newName) {
-          toastMessage("This name is already exist!", "failed");
-          input.style.backgroundColor = "red";
-          return;
-        }
-      });
+      const isDuplicate = folders.some((f) => f.name === newName);
+      if (isDuplicate) {
+        toastMessage("This name already exists!", "failed");
+        input.style.backgroundColor = "red";
+        return;
+      }
 
       const folderId = folderItem.dataset.folderId;
       const folder = folders.find((f) => f.id == folderId);

@@ -24,7 +24,8 @@ newFF.forEach(({ icon, name, classname, idname }) => {
         if (idname === 'new-folder') {
             newFolder();
         }
-        newDropdown.style.display = 'none';
+        const hideDropdown = createNewItems.querySelector(newDropdown);
+        if(hideDropdown) newDropdown.style.display = 'none';
     });
 
     div.appendChild(folder);
