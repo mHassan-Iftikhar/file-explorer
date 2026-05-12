@@ -1,0 +1,59 @@
+#command-bar {
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 10px;
+    @include flex-box(space-between, center, row, 10px);
+    flex-wrap: nowrap;
+
+    .command-bar-left {
+        @include flex-box(center, center, row, 20px);
+        span {
+            scale: 0.8;
+            color: var(--icons-color);
+        }
+
+        #refresh-btn:hover {
+            cursor: pointer;
+        }
+    }
+
+    .command-bar-center {
+        width: 100%;
+        @include flex-box(start, center, row, 10px);
+        padding: 8px;
+        border-radius: 6px;
+        background-color: var(--command-line-center-bg-color);
+
+        span {
+            scale: 0.8;
+            color: var(--icons-color);
+        }
+        span:nth-child(1):hover {
+            cursor: default;
+        }
+        span:hover {
+            cursor: pointer;
+        }
+    }
+
+    .command-bar-right {
+        width: 40%;
+        min-width: max-content;
+        @include positions(relative);
+
+        #command-bar-search {
+            width: 100%;
+            @include flex-box(space-between, center, row);
+            padding: 12px 14px;
+            border-radius: 6px;
+            background-color: var(--command-line-center-bg-color);
+            border: none;
+            color: rgb(210, 210, 210);
+        }
+        #search-icon {
+            @include positions(absolute, 8px, 10px);
+            scale: 0.6;
+            color: var(--icons-color);
+        }
+    }
+}

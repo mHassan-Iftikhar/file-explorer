@@ -1,0 +1,50 @@
+@import "components/title-bar";
+@import "components/command-bar";
+@import "components/action-bar";
+@import "components/explorer-body";
+@import "components/nav-pane";
+@import "components/content-area";
+@import "components/context-menu";
+@import "abstracts/mixins";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: poppins;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+
+    #file-explorer {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(8, 8, 8);
+        color: white;
+    }
+
+    &::selection {
+        background: transparent;
+    }
+}
+
+:root {
+    --primary-color: rgb(18, 18, 18);
+    --command-line-center-bg-color: rgb(27, 27, 27);
+    --explorer-bg-color: rgb(20, 20, 20);
+    --nav-pane-tabs-hover-bg-color: rgb(28, 28, 28);
+    --icons-color: rgb(176, 176, 176);
+    --border-color: rgb(38, 38, 38);
+
+    --folders-hover-bg--color: rgb(38, 38, 38);
+    --windows-folder-background-color: #0e4372;
+    --windows-folder-border-color: #0078d4;
+}

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/scss/main.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <div id="file-explorer">
+        <header id="title-bar">
+          <div class="title-bar-left">
+            <div class="title">
+              <div class="title-cross">
+                <div class="title-cross-left">
+                  <img id="home-icon" src="/assets/home.svg" alt="home-icon" />
+                  <span>Home</span>
+                </div>
+                <span id="close-icon" class="material-icons"> close </span>
+              </div>
+            </div>
+            <span id="add-icon" class="material-icons"> add </span>
+          </div>
+          <div class="title-bar-right">
+            <div id="minimize-btn" class="action-btn"></div>
+            <div id="maximize-btn" class="action-btn"></div>
+            <div id="close-btn" class="action-btn"></div>
+          </div>
+        </header>
+        <nav id="command-bar">
+          <div class="command-bar-left">
+            <span class="material-icons"> chevron_left </span>
+            <span class="material-icons"> chevron_right </span>
+            <span class="material-icons"> arrow_upward </span>
+            <span class="material-icons" id="refresh-btn"> refresh </span>
+          </div>
+          <div class="command-bar-center">
+            <span class="material-icons"> home </span>
+            <span class="material-icons"> chevron_right </span>
+            <span>Home</span>
+            <span class="material-icons"> chevron_right </span>
+          </div>
+          <div class="command-bar-right">
+            <input
+              id="command-bar-search"
+              type="search"
+              placeholder="Search Home"
+            />
+            <span id="search-icon" class="material-icons"> search </span>
+          </div>
+        </nav>
+        <div id="action-bar">
+          <div class="action-bar-left">
+            <div class="create-new-items">
+              <span class="material-icons"> control_point </span>
+              <span>New</span>
+              <span class="material-icons"> keyboard_arrow_down </span>
+
+              <div class="new-dropdown">
+              </div>
+            </div>
+            <div class="quick-shortcuts">
+              <span class="material-icons"> content_cut </span>
+              <span class="material-icons"> copy_all </span>
+              <span class="material-icons"> content_paste </span>
+              <span id="rename" class="material-icons"> drive_file_rename_outline </span>
+              <span class="material-icons"> ios_share </span>
+            </div>
+            <div class="expand-bar">
+              <div class="expand-bar-items" id="sort-items">
+                <span class="material-icons"> sort_by_alpha </span>
+                <span>Sort</span>
+                <span class="material-icons"> keyboard_arrow_down </span>
+              </div>
+              <div class="expand-bar-items" id="view-items">
+                <span class="material-icons"> view_agenda </span>
+                <span>View</span>
+                <span class="material-icons"> keyboard_arrow_down </span>
+              </div>
+              <div class="expand-bar-items" id="filter-items">
+                <span class="material-icons"> filter_alt </span>
+                <span>Filter</span>
+                <span class="material-icons"> keyboard_arrow_down </span>
+              </div>
+            </div>
+            <div class="see-more">
+              <span class="material-icons"> more_horiz </span>
+            </div>
+          </div>
+          <div class="action-bar-right">
+            <span class="material-icons"> display_settings </span>
+            <span>Details</span>
+          </div>
+        </div>
+        <div id="explorer-body">
+          <aside id="nav-pane">
+            <div class="nav-pane-space">
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> home </span>
+                <span>Home</span>
+              </div>
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> album </span>
+                <span>Gallery</span>
+              </div>
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> cloud </span>
+                <span>Hassan - Personal</span>
+              </div>
+              <hr />
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> desktop_windows </span>
+                <span>Desktop</span>
+              </div>
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> file_download </span>
+                <span>Downloads</span>
+              </div>
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> article </span>
+                <span>Documents</span>
+              </div>
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> camera </span>
+                <span>Pictures</span>
+              </div>
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> queue_music </span>
+                <span>Music</span>
+              </div>
+              <div class="nav-pane-tabs">
+                <span class="material-icons"> videocam </span>
+                <span>Videos</span>
+              </div>
+            </div>
+          </aside>
+          <div id="content-area">
+            <div class="content-grid" id="contentGrid"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="/js/deleteFolder.js"></script>
+    <script type="module" src="/js/newDropdown.js"></script>
+    <script type="module" src="/js/loadFolders.js"></script>
+    <script type="module" src="/js/renameFolder.js"></script>
+    <script type="module" src="/js/refreshPage.js"></script>
+    <script type="module" src="/js/openFolder.js"></script>
+  </body>
+</html>

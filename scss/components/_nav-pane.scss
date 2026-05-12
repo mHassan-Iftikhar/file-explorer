@@ -1,0 +1,30 @@
+#nav-pane {
+  width: 15%;
+  min-width: max-content;
+  height: 100%;
+  background-color: var(--explorer-bg-color);
+  padding: 4px 0;
+
+  .nav-pane-space {
+    padding: 4px;
+    .nav-pane-tabs {
+        @include flex-box(start, center, row, 4px);
+        padding: 12px 30px;
+        color: var(--icons-color);
+    
+        span {
+          font-size: 14px;
+        }
+      }
+      .nav-pane-tabs:hover {
+        cursor: pointer;
+        background-color: var(--nav-pane-tabs-hover-bg-color);
+        border-radius: 4px;
+      }
+    
+      hr {
+        margin: 6px 4px;
+        border: 1px solid var(--border-color);
+      }
+  }
+}

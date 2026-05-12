@@ -1,0 +1,70 @@
+@import 'abstracts/mixins';
+
+#title-bar {
+    @include flex-box(space-between, center);
+    margin: 0 6px;
+
+    .title-bar-left {
+        width: 16%;
+        @include flex-box(space-between, center);
+
+        .title {
+            width: 100%;
+            min-width: max-content;
+            @include flex-box(space-between, center, row);
+            background-color: var(--primary-color);
+            border-radius: 10px 10px 0 0;
+
+            .title-cross {
+                width: 100%;
+                min-width: 100%;
+                @include flex-box(space-between, center, row);
+                padding: 4px 8px;
+                z-index: 1;
+
+                #close-icon {
+                    scale: 0.6;
+                }
+                #close-icon:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .title-cross-left {
+                @include flex-box(center, center, row, 10px);
+                font-size: small;
+
+                #home-icon {
+                    width: 16px;
+                }                                       
+            }
+        }
+        #add-icon {
+            scale: 0.7;
+            padding: 4px;
+        }
+    }
+
+    .title-bar-right {
+        @include flex-box(center, center, row, 10px);
+        padding: 10px;
+
+        .action-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50px;
+        }
+        .action-btn:hover {
+            cursor: pointer;
+        }
+        #minimize-btn {
+            background-color: rgb(255, 183, 0);
+        }
+        #maximize-btn {
+            background-color: rgb(72, 255, 0);
+        }
+        #close-btn {
+            background-color: rgb(255, 0, 0);
+        }
+    }
+}

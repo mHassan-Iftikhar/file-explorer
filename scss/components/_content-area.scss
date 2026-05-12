@@ -1,0 +1,66 @@
+#content-area {
+  width: 85%;
+  height: 100%;
+  background-color: var(--explorer-bg-color);
+  // background-color: red;
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  border-right: 0;
+  padding: 6px;
+  // overflow-y: auto;
+  // overflow-x: hidden;
+
+  @include positions(relative);
+
+  @include flex-box(start, start, row);
+
+  .content-grid {
+    width: 100%;
+    height: max-content;
+    @include flex-box(start, start, row, 6px);
+    flex-wrap: wrap;
+    .folder-item {
+      @include flex-box($align: center);
+      @include positions(relative);
+      width: 20%;
+      min-width: fit-content;
+      height: max-content;
+      padding: 8px;
+      border-radius: 2px;
+      cursor: pointer;
+      gap: 6px;
+
+      &:hover {
+        background-color: var(--folders-hover-bg--color);
+      }
+
+      &__icon {
+        font-size: 38px;
+        line-height: 1;
+      }
+
+      // &--new {
+      //     outline: 1.5px solid #0078d4;
+      // }
+
+      &__rename-input {
+        width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+        color: #fff;
+        // background: var(--windows-folder-background-color);
+        background-color: transparent;
+        // border: 1.5px solid var(--windows-folder-border-color);
+        border: none;
+        // border-radius: 3px;
+        text-align: left;
+        width: max-content;
+        padding: 1px 4px;
+        outline: none;
+        caret-color: white;
+
+        // &::selection { background: var(--windows-folder-border-color); color: #fff; }
+      }
+    }
+  }
+}
