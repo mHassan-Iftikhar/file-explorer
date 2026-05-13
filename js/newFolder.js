@@ -1,5 +1,5 @@
-const contentGrid = document.querySelector('.content-grid');
-import {foldi} from './loadFolders.js';
+import { foldi } from './loadFolders.js';
+import { saveFolders } from './store.js';
 
 function createNewFolder() {
     let folderName = "New folder";
@@ -12,14 +12,16 @@ function createNewFolder() {
         folderName = `${baseName} (${counter})`;
         counter++;
     }
-
+ 
     const folder = {
         id: Date.now(),
         name: folderName,
+        parentId: null,
+        history: [null]
     };
 
     folders.push(folder);
-    localStorage.setItem("folders", JSON.stringify(folders));
+    saveFolders();
 
     foldi(folder);
 }

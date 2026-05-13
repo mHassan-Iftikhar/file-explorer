@@ -1,5 +1,6 @@
 const contentGrid = document.querySelector(".content-grid");
 let folders = JSON.parse(localStorage.getItem("folders")) || [];
+import { saveFolders } from "./nestedFolder";
 
 function toastMessage(msg, type) {
   const div = document.createElement("div");
@@ -67,7 +68,7 @@ contentGrid.addEventListener("click", (e) => {
         folder.name = newName;
       }
 
-      localStorage.setItem("folders", JSON.stringify(folders));
+      saveFolders();
       input.contentEditable = false;
       input.classList.remove("rename-mode");
     }

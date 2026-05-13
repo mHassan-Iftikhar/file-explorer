@@ -1,3 +1,5 @@
+import { saveFolders } from "./nestedFolder";
+
 const contentGrid = document.getElementById("contentGrid");
 
 contentGrid.addEventListener('contextmenu', (e) => {
@@ -38,7 +40,7 @@ contentGrid.addEventListener("click", (e) => {
 
     let folders = JSON.parse(localStorage.getItem("folders")) || [];
     folders = folders.filter(f => f.id !== parseInt(folderId));
-    localStorage.setItem("folders", JSON.stringify(folders));
+    saveFolders();
 
     console.log("Folder deleted successfully");
 });
