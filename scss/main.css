@@ -411,10 +411,10 @@
     font-size: 14px; }
   .folder-item .context-menu {
     position: absolute;
-    top: 20%;
-    right: -60%;
-    top: 20%;
-    right: -60%;
+    top: 100%;
+    left: 0;
+    top: 100%;
+    left: 0;
     display: none;
     background-color: rgba(26, 26, 26, 0.6);
     backdrop-filter: blur(5px);

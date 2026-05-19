@@ -1,29 +1,16 @@
-import { foldi } from './loadFolders.js';
-import { saveFolders } from './store.js';
-
-function createNewFolder() {
-    let folderName = "New folder";
-    let folders = JSON.parse(localStorage.getItem("folders")) || [];
-
-    let baseName = folderName;
-    let counter = 1;
-
-    while (folders.some(f => f.name === folderName)) {
-        folderName = `${baseName} (${counter})`;
-        counter++;
-    }
- 
-    const folder = {
-        id: Date.now(),
-        name: folderName,
-        parentId: null,
-        history: [null]
-    };
-
-    folders.push(folder);
-    saveFolders();
-
-    foldi(folder);
-}
+import { createNewFolder, contextWindow } from "./functions.js";
 
 export default createNewFolder;
+
+const contentGrid = document.querySelector("#contentGrid");
+
+contentGrid.addEventListener("dblclick", (e) => {
+  const folderItem = e.target.closest(".folder-item");
+  if (!folderItem) return;
+
+  folderItem.dataset.folderId;
+
+  contextWindow();
+
+  
+});

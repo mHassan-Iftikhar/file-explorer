@@ -1,26 +1,24 @@
-const input = document.querySelector('#command-bar-search');
-const contentGrid = document.querySelector('#contentGrid');
-import {foldi} from './loadFolders.js';
+import { foldi } from "./functions.js";
 
-input.addEventListener('input', (e) => {
-    const value = e.target.value.toLowerCase();
+const input = document.querySelector("#command-bar-search");
+const contentGrid = document.querySelector("#contentGrid");
 
-    const folders = JSON.parse(localStorage.getItem("folders"));
+input.addEventListener("input", (e) => {
+  const value = e.target.value.toLowerCase();
+  const folders = JSON.parse(localStorage.getItem("folders")) || [];
 
-    const matchedFolders = folders.filter((folder) => {
-        return folder.name.toLowerCase().includes(value);
-    });
+  const matchedFolders = folders.filter((folder) =>
+    folder.name.toLowerCase().includes(value)
+  );
 
-    contentGrid.innerHTML = ``;
-    
-    if (matchedFolders.length === 0) {
-        contentGrid.innerHTML = '<p class="no-file-found">No files found</p>';
-        return;
-    }
+  contentGrid.innerHTML = "";
 
-    matchedFolders.forEach(folder => {
-        foldi(folder);
-    });
+  if (matchedFolders.length === 0) {
+    contentGrid.innerHTML = '<p class="no-file-found">No files found</p>';
+    return;
+  }
 
-    console.log("Found Folders", matchedFolders);
-})
+  matchedFolders.forEach((folder) => foldi(folder));
+
+  console.log("Found Folders", matchedFolders);
+});

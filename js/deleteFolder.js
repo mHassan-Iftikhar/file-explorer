@@ -1,46 +1,43 @@
-import { saveFolders } from "./nestedFolder";
+import { removeFolder } from "./functions.js";
 
 const contentGrid = document.getElementById("contentGrid");
 
-contentGrid.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+contentGrid.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
 
-    const folderItem = e.target.closest('.folder-item');
-    if (!folderItem) return;
+  const folderItem = e.target.closest(".folder-item");
+  if (!folderItem) return;
 
-    const contextMenu = folderItem.querySelector('.context-menu');
-    if (!contextMenu) return;
+  const contextMenu = folderItem.querySelector(".context-menu");
+  if (!contextMenu) return;
 
-    contextMenu.style.display = "block";
-    console.log("Right-click detected on folder!");
+  document.querySelectorAll(".context-menu").forEach((menu) => {
+    menu.style.display = "none";
+  });
+
+  contextMenu.style.display = "block";
 });
 
 document.addEventListener("click", (e) => {
-    if (!e.target.closest('.context-menu') && !e.target.closest('.folder-item')) {
-        const contextMenus = document.querySelectorAll(".context-menu");
-        contextMenus.forEach(menu => {
-            menu.style.display = "none";
-        });
-    }
+  if (!e.target.closest(".context-menu") && !e.target.closest(".folder-item")) {
+    document.querySelectorAll(".context-menu").forEach((menu) => {
+      menu.style.display = "none";
+    });
+  }
 });
 
 contentGrid.addEventListener("click", (e) => {
-    const deleteBtn = e.target.closest('.delete-item');
-    if (!deleteBtn) return;
+  const deleteBtn = e.target.closest(".delete-item");
+  if (!deleteBtn) return;
 
-    e.stopPropagation();
-    const folderItem = deleteBtn.closest('.folder-item');
-    if (!folderItem) return;
+  e.stopPropagation();
 
-    const folderId = folderItem.dataset.folderId;
-    console.log("Delete option triggered for folder ID:", folderId);
+  const folderItem = deleteBtn.closest(".folder-item");
+  if (!folderItem) return;
 
-    folderItem.remove();
+  const folderId = folderItem.dataset.folderId;
+  console.log("Delete option triggered for folder ID:", folderId);
 
-    let folders = JSON.parse(localStorage.getItem("folders")) || [];
-    folders = folders.filter(f => f.id !== parseInt(folderId));
-    saveFolders();
-
-    console.log("Folder deleted successfully");
+  folderItem.remove();
+  removeFolder(parseInt(folderId, 10));
 });

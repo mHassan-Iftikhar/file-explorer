@@ -12,7 +12,7 @@
   }
 
   .context-menu {
-    @include positions(absolute, 20%, $right: -60%);
+    @include positions(absolute, 100%, $left: 0);
     display: none;
     background-color: rgba(26, 26, 26, 0.6);
     backdrop-filter: blur(5px);
