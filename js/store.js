@@ -1,21 +1,19 @@
-let folders = JSON.parse(localStorage.getItem("folders")) || [];
-let currentParentId = null;
-let history = [null];
-let historyIndex = 0;
+const STORAGE_KEY = "folders";
 
-const contentArea = document.querySelector("#content-area");
+class LocalStorage {
+  getData() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  }
 
-const newFF = [
-  { icon: "📁", name: "Folder",                     idname: "new-folder",  classname: "new-select" },
-  { icon: "🔗", name: "Shortcut",                   idname: "shortcut",    classname: "new-select" },
-  { icon: "📁", name: "Microsoft Access Database",  idname: "ms-access-db",classname: "new-select" },
-];
+  saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
 
-export {
-  folders,
-  currentParentId,
-  history,
-  historyIndex,
-  contentArea,
-  newFF,
-}; 
+  clear() {
+    localStorage.removeItem(STORAGE_KEY);
+  }
+}
+
+const store = new LocalStorage();
+
+export { store };
