@@ -151,10 +151,6 @@ class UI {
         cancelRename();
       }
     });
-
-    input.addEventListener("blur", () => {
-      saveRename();
-    });
   }
 
   renderAll() {
@@ -182,14 +178,13 @@ class DeleteFolder extends UI {
         <div class="menu-item delete-btn">Delete</div>
     `;
 
-    // Calculate mouse click position relative to the folderItem
     const rect = folderItem.getBoundingClientRect();
-    const relativeX = x - rect.left;
-    const relativeY = y - rect.top;
+    const xAxis = x - rect.left;
+    const yAxis = y - rect.top;
 
     menu.style.position = "absolute";
-    menu.style.left = `${relativeX}px`;
-    menu.style.top = `${relativeY}px`;
+    menu.style.left = `${xAxis}px`;
+    menu.style.top = `${yAxis}px`;
     menu.style.display = "block";
 
     folderItem.appendChild(menu);
