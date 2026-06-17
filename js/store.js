@@ -1,16 +1,14 @@
-const STORAGE_KEY = "folders";
-
 class LocalStorage {
   getData() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    return JSON.parse(localStorage.getItem("folders")) || [];
   }
 
   saveData(data) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    localStorage.setItem("folders", JSON.stringify(data));
   }
 
   clear() {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem("folders");
   }
 }
 
