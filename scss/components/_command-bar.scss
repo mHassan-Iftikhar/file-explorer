@@ -15,6 +15,12 @@
         #refresh-btn:hover {
             cursor: pointer;
         }
+
+        #back-btn:hover,
+        #forward-btn:hover,
+        #up-btn:hover {
+            cursor: pointer;
+        }
     }
 
     .command-bar-center {
@@ -28,11 +34,14 @@
             scale: 0.8;
             color: var(--icons-color);
         }
-        span:nth-child(1):hover {
-            cursor: default;
-        }
         span:hover {
             cursor: pointer;
+        }
+
+        .breadcrumb-item {
+            cursor: pointer;
+            color: var(--icons-color);
+            font-size: 13px;
         }
     }
 
