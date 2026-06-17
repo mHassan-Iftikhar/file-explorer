@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="D5vPDQUIq-zPKPFsgKV7-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="LocalStorage" vertex="1">
+        <mxCell id="D5vPDQUIq-zPKPFsgKV7-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="LocalStorage" vertex="1">
           <mxGeometry height="104" width="140" x="130" y="160" as="geometry" />
         </mxCell>
         <mxCell id="D5vPDQUIq-zPKPFsgKV7-2" parent="D5vPDQUIq-zPKPFsgKV7-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="getData();" vertex="1">
@@ -35,7 +35,7 @@
           <mxGeometry height="26" width="140" y="78" as="geometry" />
         </mxCell>
         <mxCell id="D5vPDQUIq-zPKPFsgKV7-17" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Toast" vertex="1">
-          <mxGeometry height="52" width="160" x="330" y="320" as="geometry" />
+          <mxGeometry height="52" width="160" x="350" y="320" as="geometry" />
         </mxCell>
         <mxCell id="D5vPDQUIq-zPKPFsgKV7-18" parent="D5vPDQUIq-zPKPFsgKV7-17" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="toastMessage(msg, type);" vertex="1">
           <mxGeometry height="26" width="160" y="26" as="geometry" />
