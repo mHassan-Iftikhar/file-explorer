@@ -107,6 +107,8 @@
     #command-bar .command-bar-left span {
       scale: 0.8;
       color: var(--icons-color); }
+    #command-bar .command-bar-left #chevron-left:hover {
+      cursor: default; }
     #command-bar .command-bar-left #refresh-btn:hover {
       cursor: pointer; }
     #command-bar .command-bar-left #back-btn:hover,
@@ -165,6 +167,8 @@
 
 #action-bar {
   width: 100%;
+  position: relative;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -285,6 +289,197 @@
         scale: 0.8; }
       #action-bar .action-bar-left .expand-bar .expand-bar-items:hover {
         cursor: default; }
+      #action-bar .action-bar-left .expand-bar #sort-items,
+      #action-bar .action-bar-left .expand-bar #view-items,
+      #action-bar .action-bar-left .expand-bar #filter-items {
+        position: relative; }
+    #action-bar .action-bar-left .create-new-items .new-dropdown,
+    #action-bar .action-bar-left .create-new-items .sort-items_dropdown,
+    #action-bar .action-bar-left .create-new-items .view-items_dropdown,
+    #action-bar .action-bar-left .create-new-items .filter-items_dropdown,
+    #action-bar .action-bar-left #sort-items .new-dropdown,
+    #action-bar .action-bar-left #sort-items .sort-items_dropdown,
+    #action-bar .action-bar-left #sort-items .view-items_dropdown,
+    #action-bar .action-bar-left #sort-items .filter-items_dropdown,
+    #action-bar .action-bar-left #view-items .new-dropdown,
+    #action-bar .action-bar-left #view-items .sort-items_dropdown,
+    #action-bar .action-bar-left #view-items .view-items_dropdown,
+    #action-bar .action-bar-left #view-items .filter-items_dropdown,
+    #action-bar .action-bar-left #filter-items .new-dropdown,
+    #action-bar .action-bar-left #filter-items .sort-items_dropdown,
+    #action-bar .action-bar-left #filter-items .view-items_dropdown,
+    #action-bar .action-bar-left #filter-items .filter-items_dropdown {
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      top: 50px;
+      left: 0px;
+      padding: 10px;
+      background-color: rgba(41, 41, 41, 0.595);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      width: max-content;
+      height: max-content;
+      border-radius: 4px;
+      display: none;
+      z-index: 999; }
+      #action-bar .action-bar-left .create-new-items .new-dropdown__items,
+      #action-bar .action-bar-left .create-new-items .sort-items_dropdown__items,
+      #action-bar .action-bar-left .create-new-items .view-items_dropdown__items,
+      #action-bar .action-bar-left .create-new-items .filter-items_dropdown__items,
+      #action-bar .action-bar-left #sort-items .new-dropdown__items,
+      #action-bar .action-bar-left #sort-items .sort-items_dropdown__items,
+      #action-bar .action-bar-left #sort-items .view-items_dropdown__items,
+      #action-bar .action-bar-left #sort-items .filter-items_dropdown__items,
+      #action-bar .action-bar-left #view-items .new-dropdown__items,
+      #action-bar .action-bar-left #view-items .sort-items_dropdown__items,
+      #action-bar .action-bar-left #view-items .view-items_dropdown__items,
+      #action-bar .action-bar-left #view-items .filter-items_dropdown__items,
+      #action-bar .action-bar-left #filter-items .new-dropdown__items,
+      #action-bar .action-bar-left #filter-items .sort-items_dropdown__items,
+      #action-bar .action-bar-left #filter-items .view-items_dropdown__items,
+      #action-bar .action-bar-left #filter-items .filter-items_dropdown__items {
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        gap: 2px;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        gap: 2px; }
+      #action-bar .action-bar-left .create-new-items .new-dropdown .new-select,
+      #action-bar .action-bar-left .create-new-items .new-dropdown .sort-select,
+      #action-bar .action-bar-left .create-new-items .new-dropdown .view-select,
+      #action-bar .action-bar-left .create-new-items .new-dropdown .filter-select,
+      #action-bar .action-bar-left .create-new-items .sort-items_dropdown .new-select,
+      #action-bar .action-bar-left .create-new-items .sort-items_dropdown .sort-select,
+      #action-bar .action-bar-left .create-new-items .sort-items_dropdown .view-select,
+      #action-bar .action-bar-left .create-new-items .sort-items_dropdown .filter-select,
+      #action-bar .action-bar-left .create-new-items .view-items_dropdown .new-select,
+      #action-bar .action-bar-left .create-new-items .view-items_dropdown .sort-select,
+      #action-bar .action-bar-left .create-new-items .view-items_dropdown .view-select,
+      #action-bar .action-bar-left .create-new-items .view-items_dropdown .filter-select,
+      #action-bar .action-bar-left .create-new-items .filter-items_dropdown .new-select,
+      #action-bar .action-bar-left .create-new-items .filter-items_dropdown .sort-select,
+      #action-bar .action-bar-left .create-new-items .filter-items_dropdown .view-select,
+      #action-bar .action-bar-left .create-new-items .filter-items_dropdown .filter-select,
+      #action-bar .action-bar-left #sort-items .new-dropdown .new-select,
+      #action-bar .action-bar-left #sort-items .new-dropdown .sort-select,
+      #action-bar .action-bar-left #sort-items .new-dropdown .view-select,
+      #action-bar .action-bar-left #sort-items .new-dropdown .filter-select,
+      #action-bar .action-bar-left #sort-items .sort-items_dropdown .new-select,
+      #action-bar .action-bar-left #sort-items .sort-items_dropdown .sort-select,
+      #action-bar .action-bar-left #sort-items .sort-items_dropdown .view-select,
+      #action-bar .action-bar-left #sort-items .sort-items_dropdown .filter-select,
+      #action-bar .action-bar-left #sort-items .view-items_dropdown .new-select,
+      #action-bar .action-bar-left #sort-items .view-items_dropdown .sort-select,
+      #action-bar .action-bar-left #sort-items .view-items_dropdown .view-select,
+      #action-bar .action-bar-left #sort-items .view-items_dropdown .filter-select,
+      #action-bar .action-bar-left #sort-items .filter-items_dropdown .new-select,
+      #action-bar .action-bar-left #sort-items .filter-items_dropdown .sort-select,
+      #action-bar .action-bar-left #sort-items .filter-items_dropdown .view-select,
+      #action-bar .action-bar-left #sort-items .filter-items_dropdown .filter-select,
+      #action-bar .action-bar-left #view-items .new-dropdown .new-select,
+      #action-bar .action-bar-left #view-items .new-dropdown .sort-select,
+      #action-bar .action-bar-left #view-items .new-dropdown .view-select,
+      #action-bar .action-bar-left #view-items .new-dropdown .filter-select,
+      #action-bar .action-bar-left #view-items .sort-items_dropdown .new-select,
+      #action-bar .action-bar-left #view-items .sort-items_dropdown .sort-select,
+      #action-bar .action-bar-left #view-items .sort-items_dropdown .view-select,
+      #action-bar .action-bar-left #view-items .sort-items_dropdown .filter-select,
+      #action-bar .action-bar-left #view-items .view-items_dropdown .new-select,
+      #action-bar .action-bar-left #view-items .view-items_dropdown .sort-select,
+      #action-bar .action-bar-left #view-items .view-items_dropdown .view-select,
+      #action-bar .action-bar-left #view-items .view-items_dropdown .filter-select,
+      #action-bar .action-bar-left #view-items .filter-items_dropdown .new-select,
+      #action-bar .action-bar-left #view-items .filter-items_dropdown .sort-select,
+      #action-bar .action-bar-left #view-items .filter-items_dropdown .view-select,
+      #action-bar .action-bar-left #view-items .filter-items_dropdown .filter-select,
+      #action-bar .action-bar-left #filter-items .new-dropdown .new-select,
+      #action-bar .action-bar-left #filter-items .new-dropdown .sort-select,
+      #action-bar .action-bar-left #filter-items .new-dropdown .view-select,
+      #action-bar .action-bar-left #filter-items .new-dropdown .filter-select,
+      #action-bar .action-bar-left #filter-items .sort-items_dropdown .new-select,
+      #action-bar .action-bar-left #filter-items .sort-items_dropdown .sort-select,
+      #action-bar .action-bar-left #filter-items .sort-items_dropdown .view-select,
+      #action-bar .action-bar-left #filter-items .sort-items_dropdown .filter-select,
+      #action-bar .action-bar-left #filter-items .view-items_dropdown .new-select,
+      #action-bar .action-bar-left #filter-items .view-items_dropdown .sort-select,
+      #action-bar .action-bar-left #filter-items .view-items_dropdown .view-select,
+      #action-bar .action-bar-left #filter-items .view-items_dropdown .filter-select,
+      #action-bar .action-bar-left #filter-items .filter-items_dropdown .new-select,
+      #action-bar .action-bar-left #filter-items .filter-items_dropdown .sort-select,
+      #action-bar .action-bar-left #filter-items .filter-items_dropdown .view-select,
+      #action-bar .action-bar-left #filter-items .filter-items_dropdown .filter-select {
+        width: 100%;
+        padding: 4px; }
+        #action-bar .action-bar-left .create-new-items .new-dropdown .new-select:hover,
+        #action-bar .action-bar-left .create-new-items .new-dropdown .sort-select:hover,
+        #action-bar .action-bar-left .create-new-items .new-dropdown .view-select:hover,
+        #action-bar .action-bar-left .create-new-items .new-dropdown .filter-select:hover,
+        #action-bar .action-bar-left .create-new-items .sort-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left .create-new-items .sort-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left .create-new-items .sort-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left .create-new-items .sort-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left .create-new-items .view-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left .create-new-items .view-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left .create-new-items .view-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left .create-new-items .view-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left .create-new-items .filter-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left .create-new-items .filter-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left .create-new-items .filter-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left .create-new-items .filter-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #sort-items .new-dropdown .new-select:hover,
+        #action-bar .action-bar-left #sort-items .new-dropdown .sort-select:hover,
+        #action-bar .action-bar-left #sort-items .new-dropdown .view-select:hover,
+        #action-bar .action-bar-left #sort-items .new-dropdown .filter-select:hover,
+        #action-bar .action-bar-left #sort-items .sort-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #sort-items .sort-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #sort-items .sort-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #sort-items .sort-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #sort-items .view-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #sort-items .view-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #sort-items .view-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #sort-items .view-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #sort-items .filter-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #sort-items .filter-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #sort-items .filter-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #sort-items .filter-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #view-items .new-dropdown .new-select:hover,
+        #action-bar .action-bar-left #view-items .new-dropdown .sort-select:hover,
+        #action-bar .action-bar-left #view-items .new-dropdown .view-select:hover,
+        #action-bar .action-bar-left #view-items .new-dropdown .filter-select:hover,
+        #action-bar .action-bar-left #view-items .sort-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #view-items .sort-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #view-items .sort-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #view-items .sort-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #view-items .view-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #view-items .view-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #view-items .view-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #view-items .view-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #view-items .filter-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #view-items .filter-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #view-items .filter-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #view-items .filter-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #filter-items .new-dropdown .new-select:hover,
+        #action-bar .action-bar-left #filter-items .new-dropdown .sort-select:hover,
+        #action-bar .action-bar-left #filter-items .new-dropdown .view-select:hover,
+        #action-bar .action-bar-left #filter-items .new-dropdown .filter-select:hover,
+        #action-bar .action-bar-left #filter-items .sort-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #filter-items .sort-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #filter-items .sort-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #filter-items .sort-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #filter-items .view-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #filter-items .view-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #filter-items .view-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #filter-items .view-items_dropdown .filter-select:hover,
+        #action-bar .action-bar-left #filter-items .filter-items_dropdown .new-select:hover,
+        #action-bar .action-bar-left #filter-items .filter-items_dropdown .sort-select:hover,
+        #action-bar .action-bar-left #filter-items .filter-items_dropdown .view-select:hover,
+        #action-bar .action-bar-left #filter-items .filter-items_dropdown .filter-select:hover {
+          background-color: #393939;
+          cursor: pointer; }
     #action-bar .action-bar-left .see-more {
       padding: 8px 20px; }
       #action-bar .action-bar-left .see-more span {
@@ -311,6 +506,8 @@
 #explorer-body {
   width: 100%;
   height: 84%;
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;

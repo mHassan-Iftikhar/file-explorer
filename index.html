@@ -34,7 +34,7 @@
         </header>
         <nav id="command-bar">
           <div class="command-bar-left">
-            <span class="material-icons"> chevron_left </span>
+            <span class="material-icons" id="chevron-left"> chevron_left </span>
             <span class="material-icons"> chevron_right </span>
             <span class="material-icons"> arrow_upward </span>
             <span class="material-icons" id="refresh-btn"> refresh </span>
@@ -80,16 +80,23 @@
                 <span class="material-icons"> sort_by_alpha </span>
                 <span>Sort</span>
                 <span class="material-icons"> keyboard_arrow_down </span>
+
+                <div class="sort-items_dropdown">
+                </div>
               </div>
               <div class="expand-bar-items" id="view-items">
                 <span class="material-icons"> view_agenda </span>
                 <span>View</span>
                 <span class="material-icons"> keyboard_arrow_down </span>
+
+                <div class="view-items_dropdown"></div>
               </div>
               <div class="expand-bar-items" id="filter-items">
                 <span class="material-icons"> filter_alt </span>
                 <span>Filter</span>
                 <span class="material-icons"> keyboard_arrow_down </span>
+
+                <div class="filter-items_dropdown"></div>
               </div>
             </div>
             <div class="see-more">
@@ -158,5 +165,6 @@
     <script defer type="module" src="./js/toast.js"></script>
     <script defer type="module" src="./js/ui.js"></script>
     <script defer type="module" src="./js/utils.js"></script>
+    <script defer type="module" src="./js/explorer-hierarchy.js"></script>
   </body>
 </html>

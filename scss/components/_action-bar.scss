@@ -1,114 +1,160 @@
 #action-bar {
-    width: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 20;
+  @include flex-box(space-between, center, row);
+  padding: 4px 10px;
+  border: 1px solid var(--border-color);
+  border-right: 0;
+  border-left: 0;
+  background-color: var(--explorer-bg-color);
+
+  .action-bar-left {
+    width: auto;
     @include flex-box(space-between, center, row);
-    padding: 4px 10px;
-    border: 1px solid var(--border-color);
-    border-right: 0;
-    border-left: 0;
-    background-color: var(--explorer-bg-color);
+    color: var(--icons-color);
+    flex-wrap: wrap;
 
-    .action-bar-left {
-        width: auto;
-        @include flex-box(space-between, center, row);
-        color: var(--icons-color);
-        flex-wrap: wrap;
+    .create-new-items {
+      @include flex-box(center, center, row, 4px);
+      padding: 6px 10px;
+      margin: 0 10px;
+      @include positions(relative);
 
-        .create-new-items {
-            @include flex-box(center, center, row, 4px);
-            padding: 6px 10px;
-            margin: 0 10px;
-            @include positions(relative);
+      &:hover {
+        background-color: rgb(28, 28, 28);
+        border-radius: 4px;
+      }
+      span {
+        scale: 0.8;
+      }
+      span:hover {
+        cursor: default;
+      }
 
+      .new-dropdown {
+        @include positions(absolute, 50px, $left: 0px);
+        padding: 10px;
+        background-color: rgba(41, 41, 41, 0.595);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        width: max-content;
+        height: max-content;
+        border-radius: 4px;
+        display: none;
+        z-index: 999;
+
+        .new-dropdown-items {
+          @include flex-box(start, start, column, 2px);
+
+          .new-select {
+            width: 100%;
+            padding: 4px;
             &:hover {
-                background-color: rgb(28, 28, 28);
-                border-radius: 4px;
+              background-color: rgb(57, 57, 57);
+              cursor: pointer;
             }
-            span {
-                scale: 0.8;
-            }
-            span:hover {
-                cursor: default;
-            }
-
-            .new-dropdown {
-                @include positions(absolute, 50px, $left: 0px);
-                padding: 10px;
-                background-color: rgba(41, 41, 41, 0.595);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px); 
-                width: max-content;
-                height: max-content;
-                border-radius: 4px;
-                display: none;
-                z-index: 999;
-
-                .new-dropdown-items {
-                    @include flex-box(start, start, column, 2px);
-
-                    .new-select {
-                        width: 100%;
-                        padding: 4px;
-                        &:hover {
-                            background-color: rgb(57, 57, 57);
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
+          }
         }
-
-        .quick-shortcuts {
-            @include flex-box(center, center, row, 30px);
-            padding: 6px 20px;
-            border: 1px solid var(--border-color);
-            border-top: 0;
-            border-bottom: 0;
-            span {
-                scale: 0.8;
-            }
-            span:hover {
-                cursor: pointer;
-            }
-        }
-
-        .expand-bar {
-            @include flex-box(center, center, row, 30px);
-            padding: 6px 20px;
-            border: 1px solid var(--border-color);
-            border-top: 0;
-            border-left: 0;
-            border-bottom: 0;
-
-            .expand-bar-items {
-                @include flex-box(center, center, row, 4px);
-                scale: 0.8;
-            }
-            .expand-bar-items:hover {
-                cursor: default;
-            }
-        }
-
-        .see-more {
-            padding: 8px 20px;
-            span {
-                scale: 0.8;;
-            }
-            span:hover {
-                cursor: pointer;
-            }
-        }
+      }
     }
 
-    .action-bar-right {
-        @include flex-box(center, center, row, 0px);
-        color: var(--icons-color);
-        flex-wrap: wrap;
-
-        span {
-            scale: 0.8;
-        }
-        span:hover {
-            cursor: default;
-        }
+    .quick-shortcuts {
+      @include flex-box(center, center, row, 30px);
+      padding: 6px 20px;
+      border: 1px solid var(--border-color);
+      border-top: 0;
+      border-bottom: 0;
+      span {
+        scale: 0.8;
+      }
+      span:hover {
+        cursor: pointer;
+      }
     }
+
+    .expand-bar {
+      @include flex-box(center, center, row, 30px);
+      padding: 6px 20px;
+      border: 1px solid var(--border-color);
+      border-top: 0;
+      border-left: 0;
+      border-bottom: 0;
+
+      .expand-bar-items {
+        @include flex-box(center, center, row, 4px);
+        scale: 0.8;
+      }
+      .expand-bar-items:hover {
+        cursor: default;
+      }
+
+      #sort-items,
+      #view-items,
+      #filter-items {
+        @include positions(relative);
+      }
+    }
+
+    .create-new-items,
+    #sort-items,
+    #view-items,
+    #filter-items {
+      .new-dropdown,
+      .sort-items_dropdown,
+      .view-items_dropdown,
+      .filter-items_dropdown {
+        @include positions(absolute, 50px, $left: 0px);
+        padding: 10px;
+        background-color: rgba(41, 41, 41, 0.595);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        width: max-content;
+        height: max-content;
+        border-radius: 4px;
+        display: none;
+        z-index: 999;
+
+        &__items {
+          @include flex-box(start, start, column, 2px);
+        }
+
+        .new-select,
+        .sort-select,
+        .view-select,
+        .filter-select {
+          width: 100%;
+          padding: 4px;
+
+          &:hover {
+            background-color: rgb(57, 57, 57);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .see-more {
+      padding: 8px 20px;
+      span {
+        scale: 0.8;
+      }
+      span:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .action-bar-right {
+    @include flex-box(center, center, row, 0px);
+    color: var(--icons-color);
+    flex-wrap: wrap;
+
+    span {
+      scale: 0.8;
+    }
+    span:hover {
+      cursor: default;
+    }
+  }
 }

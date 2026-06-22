@@ -15,6 +15,7 @@ class Toast {
   
     setTimeout(() => {
       div.remove();
+      window.location.reload();
     }, 2000);
   }
 }

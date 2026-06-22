@@ -1,6 +1,7 @@
 import { folderManager } from "./folder.js";
 import duplication from "./utils.js";
-
+import explorerHierarchy from "./explorer-hierarchy.js";
+import { toolbarState } from "./toolbar-state.js";
 const contentGrid = document.querySelector("#contentGrid");
 
 class UI {
@@ -8,6 +9,14 @@ class UI {
     const folderItem = document.createElement("div");
     folderItem.className = "folder-item";
     folderItem.dataset.id = folder.id;
+
+    if (toolbarState.viewMode === "list" || toolbarState.viewMode === "details") {
+      folderItem.style.display = "flex";
+      folderItem.style.alignItems = "center";
+      folderItem.style.gap = "10px";
+      folderItem.style.width = "100%";
+      folderItem.style.padding = "10px 12px";
+    }
 
     folderItem.innerHTML = `
         <div class="folder-item__icon">📁</div>
@@ -18,8 +27,11 @@ class UI {
 
     folderItem.addEventListener("contextmenu", (e) => {
       e.preventDefault();
-
       this.showContextMenu(e.clientX, e.clientY, folder.id);
+    });
+
+    folderItem.addEventListener("dblclick", () => {
+      explorerHierarchy.openFolder(folder);
     });
   }
 
@@ -66,15 +78,12 @@ class UI {
 
       if (name === "" || name === defaultName) {
         name = duplication.getUniqueName(defaultName);
-      } else {
-        if (duplication.doesNameExist(name)) {
-          name = duplication.getUniqueName(name);
-        }
+      } else if (duplication.doesNameExist(name)) {
+        name = duplication.getUniqueName(name);
       }
 
       folderManager.createFolder(name);
-
-      this.renderAll();
+      this.renderCurrentFolder();
     };
 
     const cancelAndCleanUp = () => {
@@ -99,7 +108,9 @@ class UI {
   }
 
   renameFolderUI(folderId) {
-    const folderItem = contentGrid.querySelector(`.folder-item[data-id="${folderId}"]`);
+    const folderItem = contentGrid.querySelector(
+      `.folder-item[data-id="${folderId}"]`,
+    );
     if (!folderItem) return;
 
     const nameSpan = folderItem.querySelector(".folder-item__name");
@@ -111,6 +122,12 @@ class UI {
 
     const input = document.createElement("input");
     input.className = "folder-item__rename-input";
+    input.style.backgroundColor = '#0a70cf';
+    input.style.border = '1px solid white';
+    input.style.fieldSizing = 'content';
+    input.style.minWidth = '60px';
+    input.style.maxWidth = '100%';
+    input.style.cursor = 'text';
     input.value = currentName;
 
     nameSpan.replaceWith(input);
@@ -126,14 +143,15 @@ class UI {
       let newName = input.value.trim();
       if (newName === "") {
         newName = currentName;
-      } else if (newName !== currentName) {
-        if (duplication.doesNameExist(newName)) {
-          newName = duplication.getUniqueName(newName);
-        }
+      } else if (
+        newName !== currentName &&
+        duplication.doesNameExist(newName, folderId)
+      ) {
+        newName = duplication.getUniqueName(newName);
       }
 
       folderManager.renameFolder(folderId, newName);
-      this.renderAll();
+      this.renderCurrentFolder();
     };
 
     const cancelRename = () => {
@@ -151,15 +169,42 @@ class UI {
         cancelRename();
       }
     });
+
+    input.addEventListener("blur", () => {
+      saveRename();
+    });
   }
 
-  renderAll() {
+  renderCurrentFolder() {
     if (!contentGrid) return;
     contentGrid.innerHTML = "";
-    const folders = folderManager.getAll();
+
+    contentGrid.style.gridTemplateColumns =
+      toolbarState.viewMode === "grid" ? "" : "1fr";
+
+    let folders = folderManager.getCurrentChildren();
+
+    if (toolbarState.filterMode === "with-children") {
+      folders = folders.filter((folder) => folder.children?.length);
+    } else if (toolbarState.filterMode === "empty") {
+      folders = folders.filter((folder) => !folder.children?.length);
+    }
+
+    folders = [...folders].sort((left, right) => {
+      const leftName = left.name.toLowerCase();
+      const rightName = right.name.toLowerCase();
+      const comparison = leftName.localeCompare(rightName);
+
+      return toolbarState.sortDirection === "desc" ? -comparison : comparison;
+    });
+
     folders.forEach((folder) => {
       this.renderFolderItem(folder);
     });
+  }
+
+  renderAll() {
+    this.renderCurrentFolder();
   }
 }
 
@@ -167,7 +212,9 @@ class DeleteFolder extends UI {
   showContextMenu(x, y, folderId) {
     document.querySelector(".context-menu")?.remove();
 
-    const folderItem = contentGrid.querySelector(`.folder-item[data-id="${folderId}"]`);
+    const folderItem = contentGrid.querySelector(
+      `.folder-item[data-id="${folderId}"]`,
+    );
     if (!folderItem) return;
 
     const menu = document.createElement("div");
@@ -199,7 +246,7 @@ class DeleteFolder extends UI {
       e.stopPropagation();
       menu.remove();
       folderManager.deleteFolder(folderId);
-      this.renderAll();
+      this.renderCurrentFolder();
     });
 
     document.addEventListener("click", () => menu.remove(), { once: true });

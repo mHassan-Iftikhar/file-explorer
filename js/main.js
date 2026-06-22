@@ -1,12 +1,19 @@
+import searchController from "./search.js";
 import ui from "./ui.js";
-const newFolder = document.querySelector('.new-folder');
+import "./action-bar-dropdowns.js";
+
+const newFolder = document.querySelector(".new-folder");
 
 if (newFolder) {
-    newFolder.addEventListener('click', (e) => {
-        e.preventDefault();
-        ui.renderFolder();
-    });
+  newFolder.addEventListener("click", (e) => {
+    e.preventDefault();
+    ui.renderFolder();
+  });
 }
 
-ui.renderAll();
+window.addEventListener("explorer:navigate", () => {
+  ui.renderCurrentFolder();
+});
 
+ui.renderCurrentFolder();
+searchController.start();
