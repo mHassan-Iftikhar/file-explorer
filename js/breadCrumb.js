@@ -1,9 +1,9 @@
-import explorerHierarchy from "./explorer-hierarchy.js";
+import breadcrumbNavigator from "./explorer-hierarchy.js";
 
 const backButton = document.querySelector("#chevron-left");
 
 backButton?.addEventListener("click", () => {
-  explorerHierarchy.goBack();
+  breadcrumbNavigator.goBack();
 });
 
-explorerHierarchy.renderHierarchy();
+breadcrumbNavigator.renderBreadcrumbs();

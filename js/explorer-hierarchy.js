@@ -1,76 +1,97 @@
 import { folderManager } from "./folder.js";
+import { routeState } from "./route-state.js";
 
-class ExplorerHierarchy {
+class BreadcrumbNavigator {
   constructor() {
     this.hierarchy = document.querySelector(".command-bar-center");
     this.currentPath = [];
+  }
+
+  createIcon(name) {
+    const icon = document.createElement("span");
+    icon.className = "material-icons";
+    icon.textContent = name;
+    return icon;
+  }
+
+  createBreadcrumbItem(label, onClick) {
+    const item = document.createElement("span");
+    item.textContent = label;
+    item.style.cursor = "pointer";
+    item.addEventListener("click", onClick);
+    return item;
+  }
+
+  #commitNavigation(folderId) {
+    folderManager.openFolder(folderId);
+    this.renderBreadcrumbs();
+    this.notifyNavigation();
   }
 
   notifyNavigation() {
     window.dispatchEvent(new Event("explorer:navigate"));
   }
 
-  renderHierarchy() {
+  getActiveRouteInfo() {
+    const activeRoute = routeState.activeRoute || "home";
+    const activeTab = document.querySelector(`.nav-pane-tabs[data-route="${activeRoute}"]`);
+    if (activeTab) {
+      const iconEl = activeTab.querySelector(".material-icons");
+      const labelEl = activeTab.querySelector("span:not(.material-icons)");
+      return {
+        icon: iconEl ? iconEl.textContent.trim() : "home",
+        label: labelEl ? labelEl.textContent.trim() : "Home"
+      };
+    }
+    return { icon: "home", label: "Home" };
+  }
+
+  renderBreadcrumbs() {
     if (!this.hierarchy) return;
 
     this.hierarchy.innerHTML = "";
-
-    const homeIcon = document.createElement("span");
-    homeIcon.className = "material-icons";
-    homeIcon.textContent = "home";
-    this.hierarchy.appendChild(homeIcon);
-
-    const homeBtn = document.createElement("span");
-    homeBtn.className = "breadcrumb-item";
-    homeBtn.textContent = "Home";
-    homeBtn.addEventListener("click", () => this.navigateToHome());
-    this.hierarchy.appendChild(homeBtn);
+    
+    const routeInfo = this.getActiveRouteInfo();
+    this.hierarchy.appendChild(this.createIcon(routeInfo.icon));
+    this.hierarchy.appendChild(
+      this.createBreadcrumbItem(routeInfo.label, () => this.navigateToHome())
+    );
 
     this.currentPath.forEach((folder, index) => {
-      const arrow = document.createElement("span");
-      arrow.className = "material-icons";
-      arrow.textContent = "chevron_right";
-      this.hierarchy.appendChild(arrow);
-
-      const item = document.createElement("span");
-      item.className = "breadcrumb-item";
-      item.textContent = folder.name;
-      item.addEventListener("click", () => this.navigateToIndex(index));
-      this.hierarchy.appendChild(item);
+      this.hierarchy.appendChild(this.createIcon("chevron_right"));
+      this.hierarchy.appendChild(
+        this.createBreadcrumbItem(folder.name, () => this.navigateToIndex(index))
+      );
     });
   }
 
   navigateToHome() {
     this.currentPath.length = 0;
-    folderManager.openFolder(null);
-    this.renderHierarchy();
-    this.notifyNavigation();
+    this.#commitNavigation(null);
   }
 
   navigateToIndex(index) {
     this.currentPath.length = index + 1;
-    folderManager.openFolder(this.currentPath[index].id);
-    this.renderHierarchy();
-    this.notifyNavigation();
+    this.#commitNavigation(this.currentPath[index].id);
   }
 
   openFolder(folder) {
     this.currentPath.push({ id: folder.id, name: folder.name });
-    folderManager.openFolder(folder.id);
-    this.renderHierarchy();
-    this.notifyNavigation();
+    this.#commitNavigation(folder.id);
   }
 
   goBack() {
     this.currentPath.pop();
-    const folderId =
-      this.currentPath.length === 0 ? null : this.currentPath[this.currentPath.length - 1].id;
-    folderManager.openFolder(folderId);
-    this.renderHierarchy();
-    this.notifyNavigation();
+    const folderId = this.currentPath.at(-1)?.id ?? null;
+    this.#commitNavigation(folderId);
+  }
+
+  resetPath() {
+    this.currentPath = [];
+    this.renderBreadcrumbs();
   }
 }
 
-const explorerHierarchy = new ExplorerHierarchy();
+const breadcrumbNavigator = new BreadcrumbNavigator();
 
-export default explorerHierarchy;
+export default breadcrumbNavigator;

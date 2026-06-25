@@ -5,6 +5,7 @@
 @import "components/nav-pane";
 @import "components/content-area";
 @import "components/context-menu";
+@import "components/taskbar";
 @import "abstracts/mixins";
 
 * {
@@ -23,6 +24,7 @@ body {
 main {
     width: 100%;
     height: 100%;
+    background-color: black;
 
     #file-explorer {
         width: 100%;

@@ -1,7 +1,7 @@
 import ui from "./ui.js";
 import { toolbarState } from "./toolbar-state.js";
 
-class ToolbarDropdownController {
+class ToolbarManager {
   constructor() {
     this.dropdownConfig = [
       {
@@ -13,6 +13,12 @@ class ToolbarDropdownController {
             label: "Folder",
             className: "new-select",
             action: () => ui.renderFolder(),
+          },
+          {
+            icon: "📄",
+            label: "Text Document",
+            className: "new-select",
+            action: () => ui.renderFile(),
           },
           {
             icon: "🔗",
@@ -97,7 +103,7 @@ class ToolbarDropdownController {
             label: "With Children",
             className: "filter-select",
             action: () => {
-              toolbarState.filterMode = "with-children";
+              toolbarState.filterMode = "with-subFolders";
               ui.renderCurrentFolder();
             },
           },
@@ -113,10 +119,10 @@ class ToolbarDropdownController {
       },
     ];
 
-    this.init();
+    this.setupDropdowns();
   }
 
-  init() {
+  setupDropdowns() {
     this.dropdownConfig.forEach(({ button, dropdown, items }) => {
       if (!button || !dropdown) return;
 
@@ -183,4 +189,4 @@ class ToolbarDropdownController {
   }
 }
 
-new ToolbarDropdownController();
+new ToolbarManager();

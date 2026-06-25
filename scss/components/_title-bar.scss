@@ -4,6 +4,10 @@
     @include flex-box(space-between, center);
     margin: 0 6px;
 
+    &.file-explorer--maximized {
+        cursor: move;
+    }
+
     .title-bar-left {
         width: 16%;
         @include flex-box(space-between, center);

@@ -11,6 +11,4 @@ contentGrid.addEventListener("dblclick", (e) => {
   folderItem.dataset.folderId;
 
   contextWindow();
-
-  
 });

@@ -147,6 +147,8 @@
 
   .action-bar-right {
     @include flex-box(center, center, row, 0px);
+    @include positions(relative);
+
     color: var(--icons-color);
     flex-wrap: wrap;
 
@@ -156,5 +158,12 @@
     span:hover {
       cursor: default;
     }
+  }
+
+  .details-right-pane {
+    // @include positions(absolute, 20px);
+    background-color: red;
+    width: 40%;
+    height: 100%;
   }
 }

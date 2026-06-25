@@ -1,18 +1,1178 @@
-/* Error: Can't find stylesheet to import.
- *   ,
- * 1 | @import 'abstracts/mixins';
- *   |         ^^^^^^^^^^^^^^^^^^
- *   '
- *   scss\components\_title-bar.scss 1:9  @import
- *   scss\main.scss 1:9                   root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import 'abstracts/mixins';\d\a   \2502          ^^^^^^^^^^^^^^^^^^\a   \2575 \a   scss\\components\\_title-bar.scss 1:9  @import\a   scss\\main.scss 1:9                   root stylesheet";
+#title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 6px;
 }
+#title-bar.file-explorer--maximized {
+  cursor: move;
+}
+#title-bar .title-bar-left {
+  width: 16%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+}
+#title-bar .title-bar-left .title {
+  width: 100%;
+  min-width: max-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  background-color: var(--primary-color);
+  border-radius: 10px 10px 0 0;
+}
+#title-bar .title-bar-left .title .title-cross {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 4px 8px;
+  z-index: 1;
+}
+#title-bar .title-bar-left .title .title-cross #close-icon {
+  scale: 0.6;
+}
+#title-bar .title-bar-left .title .title-cross #close-icon:hover {
+  cursor: pointer;
+}
+#title-bar .title-bar-left .title .title-cross-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  font-size: small;
+}
+#title-bar .title-bar-left .title .title-cross-left #home-icon {
+  width: 16px;
+}
+#title-bar .title-bar-left #add-icon {
+  scale: 0.7;
+  padding: 4px;
+}
+#title-bar .title-bar-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
+}
+#title-bar .title-bar-right .action-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+}
+#title-bar .title-bar-right .action-btn:hover {
+  cursor: pointer;
+}
+#title-bar .title-bar-right #minimize-btn {
+  background-color: rgb(255, 183, 0);
+}
+#title-bar .title-bar-right #maximize-btn {
+  background-color: rgb(72, 255, 0);
+}
+#title-bar .title-bar-right #close-btn {
+  background-color: rgb(255, 0, 0);
+}
+
+#command-bar {
+  width: 100%;
+  background-color: var(--primary-color);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+#command-bar .command-bar-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+#command-bar .command-bar-left span {
+  scale: 0.8;
+  color: var(--icons-color);
+}
+#command-bar .command-bar-left #chevron-left:hover {
+  cursor: default;
+}
+#command-bar .command-bar-left #refresh-btn:hover {
+  cursor: pointer;
+}
+#command-bar .command-bar-left #back-btn:hover,
+#command-bar .command-bar-left #forward-btn:hover,
+#command-bar .command-bar-left #up-btn:hover {
+  cursor: pointer;
+}
+#command-bar .command-bar-center {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: var(--command-line-center-bg-color);
+}
+#command-bar .command-bar-center span {
+  scale: 0.8;
+  color: var(--icons-color);
+}
+#command-bar .command-bar-center span:hover {
+  cursor: pointer;
+}
+#command-bar .command-bar-center .breadcrumb-item {
+  cursor: pointer;
+  color: var(--icons-color);
+  font-size: 13px;
+}
+#command-bar .command-bar-right {
+  width: 40%;
+  min-width: max-content;
+  position: relative;
+}
+#command-bar .command-bar-right #command-bar-search {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background-color: var(--command-line-center-bg-color);
+  border: none;
+  color: rgb(210, 210, 210);
+}
+#command-bar .command-bar-right #search-icon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  top: 8px;
+  right: 10px;
+  scale: 0.6;
+  color: var(--icons-color);
+}
+
+#action-bar {
+  width: 100%;
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 4px 10px;
+  border: 1px solid var(--border-color);
+  border-right: 0;
+  border-left: 0;
+  background-color: var(--explorer-bg-color);
+}
+#action-bar .action-bar-left {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  color: var(--icons-color);
+  flex-wrap: wrap;
+}
+#action-bar .action-bar-left .create-new-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  padding: 6px 10px;
+  margin: 0 10px;
+  position: relative;
+}
+#action-bar .action-bar-left .create-new-items:hover {
+  background-color: rgb(28, 28, 28);
+  border-radius: 4px;
+}
+#action-bar .action-bar-left .create-new-items span {
+  scale: 0.8;
+}
+#action-bar .action-bar-left .create-new-items span:hover {
+  cursor: default;
+}
+#action-bar .action-bar-left .create-new-items .new-dropdown {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  top: 50px;
+  left: 0px;
+  padding: 10px;
+  background-color: rgba(41, 41, 41, 0.595);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: max-content;
+  height: max-content;
+  border-radius: 4px;
+  display: none;
+  z-index: 999;
+}
+#action-bar .action-bar-left .create-new-items .new-dropdown .new-dropdown-items {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  gap: 2px;
+}
+#action-bar .action-bar-left .create-new-items .new-dropdown .new-dropdown-items .new-select {
+  width: 100%;
+  padding: 4px;
+}
+#action-bar .action-bar-left .create-new-items .new-dropdown .new-dropdown-items .new-select:hover {
+  background-color: rgb(57, 57, 57);
+  cursor: pointer;
+}
+#action-bar .action-bar-left .quick-shortcuts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+  padding: 6px 20px;
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  border-bottom: 0;
+}
+#action-bar .action-bar-left .quick-shortcuts span {
+  scale: 0.8;
+}
+#action-bar .action-bar-left .quick-shortcuts span:hover {
+  cursor: pointer;
+}
+#action-bar .action-bar-left .expand-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+  padding: 6px 20px;
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+}
+#action-bar .action-bar-left .expand-bar .expand-bar-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  scale: 0.8;
+}
+#action-bar .action-bar-left .expand-bar .expand-bar-items:hover {
+  cursor: default;
+}
+#action-bar .action-bar-left .expand-bar #sort-items,
+#action-bar .action-bar-left .expand-bar #view-items,
+#action-bar .action-bar-left .expand-bar #filter-items {
+  position: relative;
+}
+#action-bar .action-bar-left .create-new-items .new-dropdown,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown,
+#action-bar .action-bar-left #sort-items .new-dropdown,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown,
+#action-bar .action-bar-left #sort-items .view-items_dropdown,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown,
+#action-bar .action-bar-left #view-items .new-dropdown,
+#action-bar .action-bar-left #view-items .sort-items_dropdown,
+#action-bar .action-bar-left #view-items .view-items_dropdown,
+#action-bar .action-bar-left #view-items .filter-items_dropdown,
+#action-bar .action-bar-left #filter-items .new-dropdown,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown,
+#action-bar .action-bar-left #filter-items .view-items_dropdown,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  top: 50px;
+  left: 0px;
+  padding: 10px;
+  background-color: rgba(41, 41, 41, 0.595);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: max-content;
+  height: max-content;
+  border-radius: 4px;
+  display: none;
+  z-index: 999;
+}
+#action-bar .action-bar-left .create-new-items .new-dropdown__items,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown__items,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown__items,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown__items,
+#action-bar .action-bar-left #sort-items .new-dropdown__items,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown__items,
+#action-bar .action-bar-left #sort-items .view-items_dropdown__items,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown__items,
+#action-bar .action-bar-left #view-items .new-dropdown__items,
+#action-bar .action-bar-left #view-items .sort-items_dropdown__items,
+#action-bar .action-bar-left #view-items .view-items_dropdown__items,
+#action-bar .action-bar-left #view-items .filter-items_dropdown__items,
+#action-bar .action-bar-left #filter-items .new-dropdown__items,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown__items,
+#action-bar .action-bar-left #filter-items .view-items_dropdown__items,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown__items {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  gap: 2px;
+}
+#action-bar .action-bar-left .create-new-items .new-dropdown .new-select,
+#action-bar .action-bar-left .create-new-items .new-dropdown .sort-select,
+#action-bar .action-bar-left .create-new-items .new-dropdown .view-select,
+#action-bar .action-bar-left .create-new-items .new-dropdown .filter-select,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown .new-select,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown .sort-select,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown .view-select,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown .filter-select,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown .new-select,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown .sort-select,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown .view-select,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown .filter-select,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown .new-select,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown .sort-select,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown .view-select,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown .filter-select,
+#action-bar .action-bar-left #sort-items .new-dropdown .new-select,
+#action-bar .action-bar-left #sort-items .new-dropdown .sort-select,
+#action-bar .action-bar-left #sort-items .new-dropdown .view-select,
+#action-bar .action-bar-left #sort-items .new-dropdown .filter-select,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown .new-select,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown .sort-select,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown .view-select,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown .filter-select,
+#action-bar .action-bar-left #sort-items .view-items_dropdown .new-select,
+#action-bar .action-bar-left #sort-items .view-items_dropdown .sort-select,
+#action-bar .action-bar-left #sort-items .view-items_dropdown .view-select,
+#action-bar .action-bar-left #sort-items .view-items_dropdown .filter-select,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown .new-select,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown .sort-select,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown .view-select,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown .filter-select,
+#action-bar .action-bar-left #view-items .new-dropdown .new-select,
+#action-bar .action-bar-left #view-items .new-dropdown .sort-select,
+#action-bar .action-bar-left #view-items .new-dropdown .view-select,
+#action-bar .action-bar-left #view-items .new-dropdown .filter-select,
+#action-bar .action-bar-left #view-items .sort-items_dropdown .new-select,
+#action-bar .action-bar-left #view-items .sort-items_dropdown .sort-select,
+#action-bar .action-bar-left #view-items .sort-items_dropdown .view-select,
+#action-bar .action-bar-left #view-items .sort-items_dropdown .filter-select,
+#action-bar .action-bar-left #view-items .view-items_dropdown .new-select,
+#action-bar .action-bar-left #view-items .view-items_dropdown .sort-select,
+#action-bar .action-bar-left #view-items .view-items_dropdown .view-select,
+#action-bar .action-bar-left #view-items .view-items_dropdown .filter-select,
+#action-bar .action-bar-left #view-items .filter-items_dropdown .new-select,
+#action-bar .action-bar-left #view-items .filter-items_dropdown .sort-select,
+#action-bar .action-bar-left #view-items .filter-items_dropdown .view-select,
+#action-bar .action-bar-left #view-items .filter-items_dropdown .filter-select,
+#action-bar .action-bar-left #filter-items .new-dropdown .new-select,
+#action-bar .action-bar-left #filter-items .new-dropdown .sort-select,
+#action-bar .action-bar-left #filter-items .new-dropdown .view-select,
+#action-bar .action-bar-left #filter-items .new-dropdown .filter-select,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown .new-select,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown .sort-select,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown .view-select,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown .filter-select,
+#action-bar .action-bar-left #filter-items .view-items_dropdown .new-select,
+#action-bar .action-bar-left #filter-items .view-items_dropdown .sort-select,
+#action-bar .action-bar-left #filter-items .view-items_dropdown .view-select,
+#action-bar .action-bar-left #filter-items .view-items_dropdown .filter-select,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown .new-select,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown .sort-select,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown .view-select,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown .filter-select {
+  width: 100%;
+  padding: 4px;
+}
+#action-bar .action-bar-left .create-new-items .new-dropdown .new-select:hover,
+#action-bar .action-bar-left .create-new-items .new-dropdown .sort-select:hover,
+#action-bar .action-bar-left .create-new-items .new-dropdown .view-select:hover,
+#action-bar .action-bar-left .create-new-items .new-dropdown .filter-select:hover,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown .new-select:hover,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown .view-select:hover,
+#action-bar .action-bar-left .create-new-items .sort-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown .new-select:hover,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown .view-select:hover,
+#action-bar .action-bar-left .create-new-items .view-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown .new-select:hover,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown .view-select:hover,
+#action-bar .action-bar-left .create-new-items .filter-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #sort-items .new-dropdown .new-select:hover,
+#action-bar .action-bar-left #sort-items .new-dropdown .sort-select:hover,
+#action-bar .action-bar-left #sort-items .new-dropdown .view-select:hover,
+#action-bar .action-bar-left #sort-items .new-dropdown .filter-select:hover,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #sort-items .sort-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #sort-items .view-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #sort-items .view-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #sort-items .view-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #sort-items .view-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #sort-items .filter-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #view-items .new-dropdown .new-select:hover,
+#action-bar .action-bar-left #view-items .new-dropdown .sort-select:hover,
+#action-bar .action-bar-left #view-items .new-dropdown .view-select:hover,
+#action-bar .action-bar-left #view-items .new-dropdown .filter-select:hover,
+#action-bar .action-bar-left #view-items .sort-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #view-items .sort-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #view-items .sort-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #view-items .sort-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #view-items .view-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #view-items .view-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #view-items .view-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #view-items .view-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #view-items .filter-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #view-items .filter-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #view-items .filter-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #view-items .filter-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #filter-items .new-dropdown .new-select:hover,
+#action-bar .action-bar-left #filter-items .new-dropdown .sort-select:hover,
+#action-bar .action-bar-left #filter-items .new-dropdown .view-select:hover,
+#action-bar .action-bar-left #filter-items .new-dropdown .filter-select:hover,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #filter-items .sort-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #filter-items .view-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #filter-items .view-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #filter-items .view-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #filter-items .view-items_dropdown .filter-select:hover,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown .new-select:hover,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown .sort-select:hover,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown .view-select:hover,
+#action-bar .action-bar-left #filter-items .filter-items_dropdown .filter-select:hover {
+  background-color: rgb(57, 57, 57);
+  cursor: pointer;
+}
+#action-bar .action-bar-left .see-more {
+  padding: 8px 20px;
+}
+#action-bar .action-bar-left .see-more span {
+  scale: 0.8;
+}
+#action-bar .action-bar-left .see-more span:hover {
+  cursor: pointer;
+}
+#action-bar .action-bar-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  position: relative;
+  color: var(--icons-color);
+  flex-wrap: wrap;
+}
+#action-bar .action-bar-right span {
+  scale: 0.8;
+}
+#action-bar .action-bar-right span:hover {
+  cursor: default;
+}
+#action-bar .details-right-pane {
+  background-color: red;
+  width: 40%;
+  height: 100%;
+}
+
+#explorer-body {
+  width: 100%;
+  height: 84%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: var(--explorer-bg-color);
+}
+
+#nav-pane {
+  width: 15%;
+  min-width: max-content;
+  height: 100%;
+  background-color: var(--explorer-bg-color);
+  padding: 4px 0;
+}
+#nav-pane .nav-pane-space {
+  padding: 4px;
+}
+#nav-pane .nav-pane-space .nav-pane-tabs {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  padding: 12px 30px;
+  color: var(--icons-color);
+}
+#nav-pane .nav-pane-space .nav-pane-tabs span {
+  font-size: 14px;
+}
+#nav-pane .nav-pane-space .nav-pane-tabs:hover {
+  cursor: pointer;
+  background-color: var(--nav-pane-tabs-hover-bg-color);
+  border-radius: 4px;
+}
+#nav-pane .nav-pane-space hr {
+  margin: 6px 4px;
+  border: 1px solid var(--border-color);
+}
+
+#content-area {
+  width: 85%;
+  height: 100%;
+  background-color: var(--explorer-bg-color);
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  border-right: 0;
+  padding: 6px;
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  flex-direction: row;
+}
+#content-area .content-grid {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: row;
+  gap: 6px;
+  justify-content: start;
+  align-items: start;
+  flex-direction: row;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+#content-area .content-grid .folder-item {
+  display: flex;
+  align-items: center;
+  align-items: center;
+  position: relative;
+  width: 20%;
+  min-width: fit-content;
+  height: max-content;
+  padding: 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  gap: 6px;
+}
+#content-area .content-grid .folder-item:hover {
+  background-color: var(--folders-hover-bg--color);
+}
+#content-area .content-grid .folder-item__icon {
+  font-size: 38px;
+  line-height: 1;
+}
+#content-area .content-grid .folder-item__rename-input {
+  width: 100%;
+  max-width: 100%;
+  font-size: 12px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  width: max-content;
+  padding: 1px 4px;
+  outline: none;
+  caret-color: white;
+}
+
+.folder-item {
+  position: relative;
+}
+.folder-item.folder-item--selected {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.folder-item .folder-item__name {
+  font-size: 14px;
+}
+.folder-item .context-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  top: 100%;
+  left: 0;
+  display: none;
+  background-color: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  width: 150px;
+  height: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 99999;
+  color: rgb(223, 223, 223);
+  overflow: hidden;
+}
+.folder-item .context-menu .menu-item {
+  padding: 10px;
+}
+.folder-item .context-menu .menu-item:hover {
+  background-color: #313131;
+  cursor: pointer;
+}
+
+main {
+  position: relative;
+}
+
+#taskbar {
+  width: 100%;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 2px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 2px;
+  position: absolute;
+  bottom: 0px;
+  bottom: 0px;
+  z-index: 9999;
+  background-color: rgba(38, 38, 38, 0.482);
+}
+#taskbar .weather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+}
+#taskbar .weather .weather-props {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 4px;
+  color: white;
+  font-size: 12px;
+}
+#taskbar .apps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  padding: 2px;
+}
+#taskbar .apps .windows-icon {
+  position: relative;
+}
+#taskbar .apps .windows-icon .windows-prop {
+  position: absolute;
+  bottom: 55px;
+  bottom: 55px;
+  display: none;
+  background-color: rgba(28, 28, 28, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: 480px;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 24px;
+  z-index: 10000;
+  cursor: default;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: white;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  text-align: left;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__search {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 8px 12px;
+  gap: 10px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__search .material-icons {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__search input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__search input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__section-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__apps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-item:active {
+  transform: translateY(0);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon {
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon--edge {
+  background: linear-gradient(135deg, #0f5c8f, #00a4ef);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon--word {
+  background: linear-gradient(135deg, #0c3e7f, #1b6ef3);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon--excel {
+  background: linear-gradient(135deg, #106f3e, #21a366);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon--powerpoint {
+  background: linear-gradient(135deg, #a92c1a, #d24726);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon--settings {
+  background: linear-gradient(135deg, #4f4f4f, #7f7f7f);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon--notepad {
+  background: linear-gradient(135deg, #43525b, #61737e);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon--store {
+  background: linear-gradient(135deg, #0078d4, #00bcf2);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-icon--photos {
+  background: linear-gradient(135deg, #7b1fa2, #e040fb);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__app-name {
+  font-size: 11px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__files-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__file-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__file-icon {
+  font-size: 24px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__file-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__file-name {
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__file-time {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+  margin-top: 8px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0078d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12px;
+  color: white;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__username {
+  font-size: 13px;
+  font-weight: 500;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__power-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+#taskbar .apps .windows-icon .windows-prop .start-menu__power-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff5252;
+}
+#taskbar .apps #search {
+  border-radius: 50px;
+  padding: 8px 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.487);
+  color: rgba(255, 255, 255, 0.652);
+  text-indent: 4px;
+}
+#taskbar .apps .same-prop {
+  padding: 4px;
+  font-size: 25px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+#taskbar .apps .same-prop:hover {
+  background-color: rgba(79, 79, 79, 0.482);
+  cursor: default;
+}
+#taskbar .dateTime {
+  color: white;
+  font-size: 14px;
+}
+#taskbar .taskbar-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.demo-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 20000;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  animation: fadeIn 0.2s ease-out;
+}
+.demo-modal__content {
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  width: 650px;
+  max-width: 90vw;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  color: white;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  overflow: hidden;
+  animation: scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.demo-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #252526;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.demo-modal__title-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-modal__icon {
+  font-size: 18px;
+}
+.demo-modal__title {
+  font-size: 14px;
+  font-weight: 500;
+}
+.demo-modal__close {
+  cursor: pointer;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.demo-modal__close:hover {
+  background: #e81123;
+  color: white;
+}
+.demo-modal__body {
+  padding: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+main #file-explorer {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(8, 8, 8);
+  color: white;
+}
+main::selection {
+  background: transparent;
+}
+
+:root {
+  --primary-color: rgb(18, 18, 18);
+  --command-line-center-bg-color: rgb(27, 27, 27);
+  --explorer-bg-color: rgb(20, 20, 20);
+  --nav-pane-tabs-hover-bg-color: rgb(28, 28, 28);
+  --icons-color: rgb(176, 176, 176);
+  --border-color: rgb(38, 38, 38);
+  --folders-hover-bg--color: rgb(38, 38, 38);
+  --windows-folder-background-color: #0e4372;
+  --windows-folder-border-color: #0078d4;
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,6 +1,6 @@
 import { folderManager } from "./folder.js";
 import duplication from "./utils.js";
-import explorerHierarchy from "./explorer-hierarchy.js";
+import breadcrumbNavigator from "./explorer-hierarchy.js";
 import { toolbarState } from "./toolbar-state.js";
 const contentGrid = document.querySelector("#contentGrid");
 
@@ -18,8 +18,11 @@ class UI {
       folderItem.style.padding = "10px 12px";
     }
 
+    const isFile = folder.type === "file";
+    const icon = isFile ? "📄" : "📁";
+
     folderItem.innerHTML = `
-        <div class="folder-item__icon">📁</div>
+        <div class="folder-item__icon">${icon}</div>
         <span class="folder-item__name">${folder.name}</span>
     `;
 
@@ -31,12 +34,22 @@ class UI {
     });
 
     folderItem.addEventListener("dblclick", () => {
-      explorerHierarchy.openFolder(folder);
+      if (isFile) {
+        if (window.showDemoFile) {
+          window.showDemoFile(folder.name, "text");
+        }
+      } else {
+        breadcrumbNavigator.openFolder(folder);
+      }
     });
   }
 
   renderFolder() {
     this.renderNewFolder();
+  }
+
+  renderFile() {
+    this.renderNewFile();
   }
 
   renderNewFolder() {
@@ -82,7 +95,7 @@ class UI {
         name = duplication.getUniqueName(name);
       }
 
-      folderManager.createFolder(name);
+      folderManager.createFolder(Date.now(), name);
       this.renderCurrentFolder();
     };
 
@@ -90,6 +103,74 @@ class UI {
       if (isSaved) return;
       isSaved = true;
       folderItem.remove();
+    };
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        saveAndCleanUp();
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        cancelAndCleanUp();
+      }
+    });
+
+    input.addEventListener("blur", () => {
+      saveAndCleanUp();
+    });
+  }
+
+  renderNewFile() {
+    if (!contentGrid) return;
+
+    const activeInput = contentGrid.querySelector(".folder-item__rename-input");
+    if (activeInput) {
+      activeInput.focus();
+      activeInput.select();
+      return;
+    }
+
+    const fileItem = document.createElement("div");
+    fileItem.className = "folder-item";
+    const defaultName = "New Text Document.txt";
+
+    fileItem.innerHTML = `
+        <div class="folder-item__icon">📄</div>
+        <input
+            class="folder-item__rename-input"
+            value="${defaultName}"
+            placeholder="${defaultName}"
+        >
+    `;
+
+    contentGrid.appendChild(fileItem);
+
+    const input = fileItem.querySelector(".folder-item__rename-input");
+    input.focus();
+    input.select();
+
+    let isSaved = false;
+
+    const saveAndCleanUp = () => {
+      if (isSaved) return;
+      isSaved = true;
+
+      let name = input.value.trim();
+
+      if (name === "" || name === defaultName) {
+        name = duplication.getUniqueName(defaultName);
+      } else if (duplication.doesNameExist(name)) {
+        name = duplication.getUniqueName(name);
+      }
+
+      folderManager.createFile(Date.now(), name);
+      this.renderCurrentFolder();
+    };
+
+    const cancelAndCleanUp = () => {
+      if (isSaved) return;
+      isSaved = true;
+      fileItem.remove();
     };
 
     input.addEventListener("keydown", (e) => {
@@ -184,10 +265,10 @@ class UI {
 
     let folders = folderManager.getCurrentChildren();
 
-    if (toolbarState.filterMode === "with-children") {
-      folders = folders.filter((folder) => folder.children?.length);
+    if (toolbarState.filterMode === "with-subFolders") {
+      folders = folders.filter((folder) => folder.subFolders?.length);
     } else if (toolbarState.filterMode === "empty") {
-      folders = folders.filter((folder) => !folder.children?.length);
+      folders = folders.filter((folder) => !folder.subFolders?.length);
     }
 
     folders = [...folders].sort((left, right) => {
@@ -201,10 +282,6 @@ class UI {
     folders.forEach((folder) => {
       this.renderFolderItem(folder);
     });
-  }
-
-  renderAll() {
-    this.renderCurrentFolder();
   }
 }
 

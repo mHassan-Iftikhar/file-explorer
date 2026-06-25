@@ -23,8 +23,8 @@ export function findFolder(folder, id) {
     return folder;
   }
 
-  if (folder.children) {
-    for(let child of folder.children) {
+  if (folder.subFolders) {
+    for(let child of folder.subFolders) {
       const found = findFolder(child, id);
 
       if(found) {
@@ -46,7 +46,7 @@ export function addFolder(parentId, folderName) {
     return;
   }
 
-  parentFolder.children.push(createFolder(folderName));
+  parentFolder.subFolders.push(createFolder(folderName));
 
   saveFolders(data);
 }
@@ -173,14 +173,14 @@ export function createNewFolder() {
     id: Date.now(),
     name: folderName,
     // createdAt,
-    children: [],
+    subFolders: [],
   };
 
   const childFolder = {
     parentId: folder.id,
     id: Date.now(),
     name: folderName,
-    children: []
+    subFolders: []
   }
 
   folders.push(folder);
