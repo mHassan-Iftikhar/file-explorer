@@ -1,6 +1,8 @@
 #explorer-body {
     width: 100%;
     height: 84%;
+    position: relative;
+    z-index: 1;
     @include flex-box(center, center, row);
     background-color: var(--explorer-bg-color);
 }

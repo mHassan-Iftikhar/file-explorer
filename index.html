@@ -34,7 +34,7 @@
         </header>
         <nav id="command-bar">
           <div class="command-bar-left">
-            <span class="material-icons"> chevron_left </span>
+            <span class="material-icons" id="chevron-left"> chevron_left </span>
             <span class="material-icons"> chevron_right </span>
             <span class="material-icons"> arrow_upward </span>
             <span class="material-icons" id="refresh-btn"> refresh </span>
@@ -80,16 +80,23 @@
                 <span class="material-icons"> sort_by_alpha </span>
                 <span>Sort</span>
                 <span class="material-icons"> keyboard_arrow_down </span>
+
+                <div class="sort-items_dropdown">
+                </div>
               </div>
               <div class="expand-bar-items" id="view-items">
                 <span class="material-icons"> view_agenda </span>
                 <span>View</span>
                 <span class="material-icons"> keyboard_arrow_down </span>
+
+                <div class="view-items_dropdown"></div>
               </div>
               <div class="expand-bar-items" id="filter-items">
                 <span class="material-icons"> filter_alt </span>
                 <span>Filter</span>
                 <span class="material-icons"> keyboard_arrow_down </span>
+
+                <div class="filter-items_dropdown"></div>
               </div>
             </div>
             <div class="see-more">
@@ -99,45 +106,46 @@
           <div class="action-bar-right">
             <span class="material-icons"> display_settings </span>
             <span>Details</span>
+            <!-- <div class="details-right-pane"></div> -->
           </div>
         </div>
         <div id="explorer-body">
           <aside id="nav-pane">
             <div class="nav-pane-space">
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="home">
                 <span class="material-icons"> home </span>
                 <span>Home</span>
               </div>
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="gallery">
                 <span class="material-icons"> album </span>
                 <span>Gallery</span>
               </div>
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="personal">
                 <span class="material-icons"> cloud </span>
                 <span>Hassan - Personal</span>
               </div>
               <hr />
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="desktop">
                 <span class="material-icons"> desktop_windows </span>
                 <span>Desktop</span>
               </div>
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="downloads">
                 <span class="material-icons"> file_download </span>
                 <span>Downloads</span>
               </div>
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="documents">
                 <span class="material-icons"> article </span>
                 <span>Documents</span>
               </div>
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="camera">
                 <span class="material-icons"> camera </span>
                 <span>Pictures</span>
               </div>
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="music">
                 <span class="material-icons"> queue_music </span>
                 <span>Music</span>
               </div>
-              <div class="nav-pane-tabs">
+              <div class="nav-pane-tabs" data-route="videos">
                 <span class="material-icons"> videocam </span>
                 <span>Videos</span>
               </div>
@@ -146,17 +154,158 @@
           <div id="content-area">
             <div class="content-grid" id="contentGrid"></div>
           </div>
+          <div class="details-right-pane"></div>
+        </div>
+      </div>
+      <div id="taskbar">
+        <div class="weather">
+          <img src="./assets/thermometer.png" width="26" alt="">
+          <span class="weather-props">
+            <span>101F</span>
+            <span>Mostly sunny</span>
+          </span>
+        </div>
+        <div class="apps">
+          <span class="windows-icon same-prop">
+            <img src="./assets/windows-11.webp" width="30" alt="">
+            <div class="windows-prop">
+              <div class="start-menu">
+                <div class="start-menu__search">
+                  <span class="material-icons">search</span>
+                  <input type="text" placeholder="Type here to search" disabled />
+                </div>
+                
+                <div class="start-menu__section">
+                  <div class="start-menu__section-header">
+                    <span class="start-menu__section-title">Pinned</span>
+                    <button class="start-menu__btn">All apps &gt;</button>
+                  </div>
+                  <div class="start-menu__apps-grid">
+                    <div class="start-menu__app-item" data-app="edge">
+                      <div class="start-menu__app-icon start-menu__app-icon--edge">🌐</div>
+                      <span class="start-menu__app-name">Edge</span>
+                    </div>
+                    <div class="start-menu__app-item" data-app="word">
+                      <div class="start-menu__app-icon start-menu__app-icon--word">📝</div>
+                      <span class="start-menu__app-name">Word</span>
+                    </div>
+                    <div class="start-menu__app-item" data-app="excel">
+                      <div class="start-menu__app-icon start-menu__app-icon--excel">📊</div>
+                      <span class="start-menu__app-name">Excel</span>
+                    </div>
+                    <div class="start-menu__app-item" data-app="powerpoint">
+                      <div class="start-menu__app-icon start-menu__app-icon--powerpoint">📉</div>
+                      <span class="start-menu__app-name">PowerPoint</span>
+                    </div>
+                    <div class="start-menu__app-item" data-app="settings">
+                      <div class="start-menu__app-icon start-menu__app-icon--settings">⚙️</div>
+                      <span class="start-menu__app-name">Settings</span>
+                    </div>
+                    <div class="start-menu__app-item" data-app="notepad">
+                      <div class="start-menu__app-icon start-menu__app-icon--notepad">📒</div>
+                      <span class="start-menu__app-name">Notepad</span>
+                    </div>
+                    <div class="start-menu__app-item" data-app="store">
+                      <div class="start-menu__app-icon start-menu__app-icon--store">🛍️</div>
+                      <span class="start-menu__app-name">Store</span>
+                    </div>
+                    <div class="start-menu__app-item" data-app="photos">
+                      <div class="start-menu__app-icon start-menu__app-icon--photos">🖼️</div>
+                      <span class="start-menu__app-name">Photos</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="start-menu__section">
+                  <div class="start-menu__section-header">
+                    <span class="start-menu__section-title">Recommended</span>
+                    <button class="start-menu__btn">More &gt;</button>
+                  </div>
+                  <div class="start-menu__files-list">
+                    <div class="start-menu__file-item" data-file-name="Project Proposal.docx" data-file-type="word">
+                      <span class="start-menu__file-icon">📄</span>
+                      <div class="start-menu__file-info">
+                        <span class="start-menu__file-name">Project Proposal.docx</span>
+                        <span class="start-menu__file-time">Added 2h ago</span>
+                      </div>
+                    </div>
+                    <div class="start-menu__file-item" data-file-name="Resume.pdf" data-file-type="pdf">
+                      <span class="start-menu__file-icon">📄</span>
+                      <div class="start-menu__file-info">
+                        <span class="start-menu__file-name">Resume.pdf</span>
+                        <span class="start-menu__file-time">Added 5h ago</span>
+                      </div>
+                    </div>
+                    <div class="start-menu__file-item" data-file-name="Financials.xlsx" data-file-type="excel">
+                      <span class="start-menu__file-icon">📄</span>
+                      <div class="start-menu__file-info">
+                        <span class="start-menu__file-name">Financials.xlsx</span>
+                        <span class="start-menu__file-time">Yesterday</span>
+                      </div>
+                    </div>
+                    <div class="start-menu__file-item" data-file-name="Sunset.jpg" data-file-type="image">
+                      <span class="start-menu__file-icon">📄</span>
+                      <div class="start-menu__file-info">
+                        <span class="start-menu__file-name">Sunset.jpg</span>
+                        <span class="start-menu__file-time">2 days ago</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="start-menu__footer">
+                  <div class="start-menu__profile">
+                    <div class="start-menu__avatar">HI</div>
+                    <span class="start-menu__username">Hassan Iftikhar</span>
+                  </div>
+                  <button class="start-menu__power-btn" title="Shut Down">
+                    <span class="material-icons">power_settings_new</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </span>
+          <span class="search-bar">
+            <input id="search" type="search" placeholder="search">
+          </span>
+          <span class="explorer same-prop">
+            <img src="./assets/folder.svg" width="34" alt="">
+          </span>
+        </div>
+        <div class="taskbar-right">
+          <img src="./assets/wifi.png" width="16" alt="wifi">
+          <img src="./assets/battery.png" width="20" alt="battery">
+          <span class="dateTime">
+          </span>
         </div>
       </div>
     </main>
+
+    <!-- Demo App/File Viewer Modal -->
+    <div id="demo-modal" class="demo-modal">
+      <div class="demo-modal__content">
+        <header class="demo-modal__header">
+          <div class="demo-modal__title-area">
+            <span class="demo-modal__icon">📄</span>
+            <span class="demo-modal__title">Demo File Viewer</span>
+          </div>
+          <span class="material-icons demo-modal__close">close</span>
+        </header>
+        <div class="demo-modal__body">
+          <!-- Dynamic content based on clicked app/file -->
+        </div>
+      </div>
+    </div>
     
-    <script type="module" src="./js/breadCrumb.js"></script>
-    <script type="module" src="./js/folder.js"></script>
-    <script type="module" src="./js/main.js"></script>
-    <script type="module" src="./js/reload.js"></script>
-    <script type="module" src="./js/store.js"></script>
-    <script type="module" src="./js/toast.js"></script>
-    <script type="module" src="./js/ui.js"></script>
-    <script type="module" src="./js/utils.js"></script>
+    <script defer type="module" src="./js/breadCrumb.js"></script>
+    <script defer type="module" src="./js/folder.js"></script>
+    <script defer type="module" src="./js/main.js"></script>
+    <script defer type="module" src="./js/reload.js"></script>
+    <script defer type="module" src="./js/store.js"></script>
+    <script defer type="module" src="./js/toast.js"></script>
+    <script defer type="module" src="./js/ui.js"></script>
+    <script defer type="module" src="./js/utils.js"></script>
+    <script defer type="module" src="./js/explorer-hierarchy.js"></script>
+    <script defer type="module" src="./js/actions-btn.js"></script>
   </body>
 </html>

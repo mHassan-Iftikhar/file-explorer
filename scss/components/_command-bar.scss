@@ -12,6 +12,12 @@
             color: var(--icons-color);
         }
 
+        #chevron-left {
+            &:hover {
+                cursor: default;
+            }
+        }
+
         #refresh-btn:hover {
             cursor: pointer;
         }
