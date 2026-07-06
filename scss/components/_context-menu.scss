@@ -1,6 +1,6 @@
-@import "abstracts/mixins";
+@import "../abstracts/mixins";
 
-.folder-item {
+#folder-item {
   @include positions(relative);
 
   &.folder-item--selected {
@@ -11,7 +11,7 @@
     font-size: 14px;
   }
 
-  .context-menu {
+  #context-menu {
     @include positions(absolute, 100%, $left: 0);
     display: none;
     background-color: rgba(26, 26, 26, 0.6);

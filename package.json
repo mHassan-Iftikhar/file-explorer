@@ -9,5 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch-css": "sass --watch scss/main.scss css/main.css"
+  },
+  "dependencies": {
+    "scss": "^0.2.4"
   }
 }

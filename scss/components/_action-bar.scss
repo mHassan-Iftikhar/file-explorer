@@ -32,24 +32,25 @@
         cursor: default;
       }
 
-      .new-dropdown {
+      #new-dropdown {
         @include positions(absolute, 50px, $left: 0px);
         padding: 10px;
         background-color: rgba(41, 41, 41, 0.595);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        width: max-content;
+        width: 14vw;
         height: max-content;
         border-radius: 4px;
         display: none;
         z-index: 999;
 
-        .new-dropdown-items {
+        #new-dropdown-items {
           @include flex-box(start, start, column, 2px);
 
           .new-select {
             width: 100%;
-            padding: 4px;
+            padding: 6px;
+            border-radius: 4px;
             &:hover {
               background-color: rgb(57, 57, 57);
               cursor: pointer;

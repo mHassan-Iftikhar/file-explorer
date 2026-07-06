@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
     <main>
       <div id="file-explorer">
@@ -62,17 +63,19 @@
               <span>New</span>
               <span class="material-icons"> keyboard_arrow_down </span>
 
-              <div class="new-dropdown">
+              <div id="new-dropdown">
                 <!-- <div id="create-folder-btn" class="dropdown-item">
                   📁 New Folder
                 </div> -->
-              </div>
+               </div>
             </div>
             <div class="quick-shortcuts">
               <span class="material-icons"> content_cut </span>
               <span class="material-icons"> copy_all </span>
               <span class="material-icons"> content_paste </span>
-              <span id="rename" class="material-icons"> drive_file_rename_outline </span>
+              <span id="rename" class="material-icons">
+                drive_file_rename_outline
+              </span>
               <span class="material-icons"> ios_share </span>
             </div>
             <div class="expand-bar">
@@ -81,8 +84,7 @@
                 <span>Sort</span>
                 <span class="material-icons"> keyboard_arrow_down </span>
 
-                <div class="sort-items_dropdown">
-                </div>
+                <div class="sort-items_dropdown"></div>
               </div>
               <div class="expand-bar-items" id="view-items">
                 <span class="material-icons"> view_agenda </span>
@@ -159,7 +161,7 @@
       </div>
       <div id="taskbar">
         <div class="weather">
-          <img src="./assets/thermometer.png" width="26" alt="">
+          <img src="./assets/thermometer.png" width="26" alt="" />
           <span class="weather-props">
             <span>101F</span>
             <span>Mostly sunny</span>
@@ -167,14 +169,18 @@
         </div>
         <div class="apps">
           <span class="windows-icon same-prop">
-            <img src="./assets/windows-11.webp" width="30" alt="">
+            <img src="./assets/windows-11.webp" width="30" alt="" />
             <div class="windows-prop">
               <div class="start-menu">
                 <div class="start-menu__search">
                   <span class="material-icons">search</span>
-                  <input type="text" placeholder="Type here to search" disabled />
+                  <input
+                    type="text"
+                    placeholder="Type here to search"
+                    disabled
+                  />
                 </div>
-                
+
                 <div class="start-menu__section">
                   <div class="start-menu__section-header">
                     <span class="start-menu__section-title">Pinned</span>
@@ -182,35 +188,67 @@
                   </div>
                   <div class="start-menu__apps-grid">
                     <div class="start-menu__app-item" data-app="edge">
-                      <div class="start-menu__app-icon start-menu__app-icon--edge">🌐</div>
+                      <div
+                        class="start-menu__app-icon start-menu__app-icon--edge"
+                      >
+                        🌐
+                      </div>
                       <span class="start-menu__app-name">Edge</span>
                     </div>
                     <div class="start-menu__app-item" data-app="word">
-                      <div class="start-menu__app-icon start-menu__app-icon--word">📝</div>
+                      <div
+                        class="start-menu__app-icon start-menu__app-icon--word"
+                      >
+                        📝
+                      </div>
                       <span class="start-menu__app-name">Word</span>
                     </div>
                     <div class="start-menu__app-item" data-app="excel">
-                      <div class="start-menu__app-icon start-menu__app-icon--excel">📊</div>
+                      <div
+                        class="start-menu__app-icon start-menu__app-icon--excel"
+                      >
+                        📊
+                      </div>
                       <span class="start-menu__app-name">Excel</span>
                     </div>
                     <div class="start-menu__app-item" data-app="powerpoint">
-                      <div class="start-menu__app-icon start-menu__app-icon--powerpoint">📉</div>
+                      <div
+                        class="start-menu__app-icon start-menu__app-icon--powerpoint"
+                      >
+                        📉
+                      </div>
                       <span class="start-menu__app-name">PowerPoint</span>
                     </div>
                     <div class="start-menu__app-item" data-app="settings">
-                      <div class="start-menu__app-icon start-menu__app-icon--settings">⚙️</div>
+                      <div
+                        class="start-menu__app-icon start-menu__app-icon--settings"
+                      >
+                        ⚙️
+                      </div>
                       <span class="start-menu__app-name">Settings</span>
                     </div>
                     <div class="start-menu__app-item" data-app="notepad">
-                      <div class="start-menu__app-icon start-menu__app-icon--notepad">📒</div>
+                      <div
+                        class="start-menu__app-icon start-menu__app-icon--notepad"
+                      >
+                        📒
+                      </div>
                       <span class="start-menu__app-name">Notepad</span>
                     </div>
                     <div class="start-menu__app-item" data-app="store">
-                      <div class="start-menu__app-icon start-menu__app-icon--store">🛍️</div>
+                      <div
+                        class="start-menu__app-icon start-menu__app-icon--store"
+                      >
+                        🛍️
+                      </div>
                       <span class="start-menu__app-name">Store</span>
                     </div>
                     <div class="start-menu__app-item" data-app="photos">
-                      <div class="start-menu__app-icon start-menu__app-icon--photos">🖼️</div>
+                      <div
+                        class="start-menu__app-icon start-menu__app-icon--photos"
+                      >
+                        🖼️
+                      </div>
                       <span class="start-menu__app-name">Photos</span>
                     </div>
                   </div>
@@ -222,28 +260,48 @@
                     <button class="start-menu__btn">More &gt;</button>
                   </div>
                   <div class="start-menu__files-list">
-                    <div class="start-menu__file-item" data-file-name="Project Proposal.docx" data-file-type="word">
+                    <div
+                      class="start-menu__file-item"
+                      data-file-name="Project Proposal.docx"
+                      data-file-type="word"
+                    >
                       <span class="start-menu__file-icon">📄</span>
                       <div class="start-menu__file-info">
-                        <span class="start-menu__file-name">Project Proposal.docx</span>
+                        <span class="start-menu__file-name"
+                          >Project Proposal.docx</span
+                        >
                         <span class="start-menu__file-time">Added 2h ago</span>
                       </div>
                     </div>
-                    <div class="start-menu__file-item" data-file-name="Resume.pdf" data-file-type="pdf">
+                    <div
+                      class="start-menu__file-item"
+                      data-file-name="Resume.pdf"
+                      data-file-type="pdf"
+                    >
                       <span class="start-menu__file-icon">📄</span>
                       <div class="start-menu__file-info">
                         <span class="start-menu__file-name">Resume.pdf</span>
                         <span class="start-menu__file-time">Added 5h ago</span>
                       </div>
                     </div>
-                    <div class="start-menu__file-item" data-file-name="Financials.xlsx" data-file-type="excel">
+                    <div
+                      class="start-menu__file-item"
+                      data-file-name="Financials.xlsx"
+                      data-file-type="excel"
+                    >
                       <span class="start-menu__file-icon">📄</span>
                       <div class="start-menu__file-info">
-                        <span class="start-menu__file-name">Financials.xlsx</span>
+                        <span class="start-menu__file-name"
+                          >Financials.xlsx</span
+                        >
                         <span class="start-menu__file-time">Yesterday</span>
                       </div>
                     </div>
-                    <div class="start-menu__file-item" data-file-name="Sunset.jpg" data-file-type="image">
+                    <div
+                      class="start-menu__file-item"
+                      data-file-name="Sunset.jpg"
+                      data-file-type="image"
+                    >
                       <span class="start-menu__file-icon">📄</span>
                       <div class="start-menu__file-info">
                         <span class="start-menu__file-name">Sunset.jpg</span>
@@ -266,46 +324,27 @@
             </div>
           </span>
           <span class="search-bar">
-            <input id="search" type="search" placeholder="search">
+            <input id="search" type="search" placeholder="search" />
           </span>
           <span class="explorer same-prop">
-            <img src="./assets/folder.svg" width="34" alt="">
+            <img src="./assets/folder.svg" width="34" alt="" />
           </span>
         </div>
         <div class="taskbar-right">
-          <img src="./assets/wifi.png" width="16" alt="wifi">
-          <img src="./assets/battery.png" width="20" alt="battery">
-          <span class="dateTime">
-          </span>
+          <img src="./assets/wifi.png" width="16" alt="wifi" />
+          <img src="./assets/battery.png" width="20" alt="battery" />
+          <span class="dateTime"> </span>
         </div>
       </div>
     </main>
 
-    <!-- Demo App/File Viewer Modal -->
-    <div id="demo-modal" class="demo-modal">
-      <div class="demo-modal__content">
-        <header class="demo-modal__header">
-          <div class="demo-modal__title-area">
-            <span class="demo-modal__icon">📄</span>
-            <span class="demo-modal__title">Demo File Viewer</span>
-          </div>
-          <span class="material-icons demo-modal__close">close</span>
-        </header>
-        <div class="demo-modal__body">
-          <!-- Dynamic content based on clicked app/file -->
-        </div>
-      </div>
-    </div>
-    
-    <script defer type="module" src="./js/breadCrumb.js"></script>
-    <script defer type="module" src="./js/folder.js"></script>
-    <script defer type="module" src="./js/main.js"></script>
-    <script defer type="module" src="./js/reload.js"></script>
-    <script defer type="module" src="./js/store.js"></script>
-    <script defer type="module" src="./js/toast.js"></script>
-    <script defer type="module" src="./js/ui.js"></script>
-    <script defer type="module" src="./js/utils.js"></script>
-    <script defer type="module" src="./js/explorer-hierarchy.js"></script>
-    <script defer type="module" src="./js/actions-btn.js"></script>
+    <script type="module" src="./ts/main.js"></script>
+    <script type="module" src="./ts/appState.js"></script>
+    <script type="module" src="./ts/breadCrumbNavigator.js"></script>
+    <script type="module" src="./ts/fileSystemManager.js"></script>
+    <script type="module" src="./ts/searchController.js"></script>
+    <script type="module" src="./ts/storageBase.js"></script>
+    <script type="module" src="./ts/uiComponents.js"></script>
+    <script type="module" src="./ts/toolBarController.js"></script>
   </body>
 </html>
