@@ -1,5 +1,6 @@
 import { folderRenderer, ui } from "./uiComponents.js";
-import app from "./appState.js"
+import app from "./appState.js";
+import fileManager from "./fileSystemManager.js";
 
 class ToolbarController {
     #newButton = document.querySelector(".create-new-items");
@@ -64,54 +65,165 @@ class ToolbarController {
         });
 
         this.#dropdownConfig.appendChild(itemsContainer);
-        // console.log("Dropdown items rendered.");
         this.#dropdownConfig.style.display = "block";
+
+        // console.log("Dropdown items rendered.");
     }
 
-    openFolderMenu() {
+    openFolderMenu(mainContainer) {
         const contextMenu = document.createElement("div");
-        contextMenu.id = "context-menu";
+
+        // contextMenu.id = "context-menu";
+        contextMenu.style.backgroundColor = 'rgba(26, 26, 26, 0.6)';
+        contextMenu.style.backdropFilter = 'blur(5px)';
+        contextMenu.style.width = '200px';
+        contextMenu.style.height = 'maxcontent';
+        contextMenu.style.display = "none";
+        contextMenu.style.position = 'absolute';
+        contextMenu.style.padding = '10px';
+        contextMenu.style.borderRadius = '8px';
+        contextMenu.style.zIndex = '9999';
+
+        // mainContainer.appendChild(contextMenu);
         document.body.appendChild(contextMenu);
-        
-        const items = document.querySelector("#contentGrid").addEventListener('contextmenu', (e) => {
+
+        contextMenu.addEventListener('click', (e) => {
+            const action = e.target.innerText;
+
+            if (action === 'Rename') {
+                const targetId = contextMenu.dataset.targetId;
+                const folderElement = document.getElementById(targetId);
+
+                // console.log(targetId);
+                // console.log(folderElement)
+
+                if (folderElement) {
+                    const iconDiv = folderElement.querySelector(".folder-item__icon");
+                    const nameDiv = folderElement.querySelector(".folder-item__name");
+
+                    const inputField = document.createElement('input');
+                    inputField.type = 'text';
+                    inputField.value = nameDiv.textContent;
+
+                    inputField.style.backgroundColor = '#2a2a2a';
+                    inputField.style.color = 'white';
+                    inputField.style.border = '1px solid #555';
+                    inputField.style.borderRadius = '4px';
+                    nameDiv.style.display = "none";
+
+                    iconDiv.after(inputField);
+
+                    inputField.focus();
+                    inputField.select();
+
+                    let isSaving = false;
+
+                    const saveRename = () => {
+
+                        // console.log("Enter save renmae function");
+
+                        isSaving = true;
+
+                        // console.log("Inside save renmae function");
+                        // console.log("trimmedValue before");
+
+                        const trimmedValue = inputField.value.trim();
+
+                        // console.log("trimmedValue after", trimmedValue);
+
+                        if (trimmedValue && trimmedValue !== nameDiv.textContent) {
+                            fileManager.renameFolder(Number(targetId), trimmedValue);
+                            nameDiv.textContent = trimmedValue;
+                            nameDiv.style.display = 'block';
+                        }
+                    }
+
+                    inputField.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            isSaving = true;
+                            inputField.remove();
+                            nameDiv.style.display = 'block';
+                        }
+                    });
+
+                    inputField.addEventListener('blur', () => {
+                        saveRename();
+                    });
+                }
+            } else if (action === 'Delete') {
+                console.log(`Deleting folder with ID: ${folderId}`);
+                fileManager.deleteFolder(Number(folderId));
+                document.location.reload();
+                contextMenu.style.display = "none";
+                return;
+            } else {
+                console.error("Not Clickable");
+                return;
+            }
+
+            contextMenu.style.display = 'none';
+        });
+
+        mainContainer.addEventListener('contextmenu', (e) => {
             e.stopPropagation();
             e.preventDefault();
-            
-            contextMenu.innerHTML = "";
-            contextMenu.style.top = `${e.pageY}px`;
-            contextMenu.style.left = `${e.pageX}px`;
-            contextMenu.style.display = "block";
-            // console.log(e.target);
-            this.folderMenuItems.forEach((item) => {
-                const singleItem = document.createElement("span");
-                singleItem.className = "menu-item";
-                singleItem.textContent = item.item;
-                
-                
 
-                // singleItem.addEventListener('click', () => {
-                //     console.log("clicked");
-                //     if (item.item === "Rename") {
-                //         console.log("Rename clicked!");
-                        
-                //     } else if (item.item === "Delete") {
-                //         console.log("Delete clicked!");
-                        
-                //     }
-                //     contextMenu.style.display = "none";
-                // });
+            const folderElement = e.target.closest('div.folder-item');
+            console.log(folderElement);
+
+            contextMenu.dataset.targetId = folderElement.id;
+
+            // if(contextMenu.dataset.targetId === folderElement.id) {
+            //     console.log("After dataset.taget", contextMenu.dataset.targetId);   
+            // }
+
+            const folderId = folderElement ? folderElement.id : null;
+
+            if (!folderId || folderId === mainContainer.id) {
+                return;
+            }
+
+            // console.log("Successfully detected Folder ID:", folderId);
+
+            const rect = contextMenu.getBoundingClientRect();
+
+            // console.log("Rect: ",rect);
+
+            contextMenu.innerHTML = "";
+            contextMenu.style.position = 'absolute';
+            contextMenu.style.top = `${e.clientY}px`;
+            contextMenu.style.left = `${e.clientX}px`;
+            contextMenu.style.display = "block";
+
+            this.#folderMenuItems.forEach((item) => {
+                const span = document.createElement('span');
+                span.textContent = item.item;
+                span.className = 'menu-items'
+                span.style.display = 'flex';
+                span.style.flexDirection = 'column';
+                span.style.fontSize = '16px';
+                span.style.padding = '10px';
+                span.style.borderRadius = '8px';
+                span.style.color = 'rgb(223, 223, 223)';
+
+                span.addEventListener('mouseenter', () => {
+                    span.style.backgroundColor = '#313131b9';
+                    // span.style.cursor = 'pointer';
+                });
+                span.addEventListener('mouseleave', () => {
+                    span.style.backgroundColor = '';
+                    // span.style.cursor = '';
+                });
+
+                contextMenu.appendChild(span);
             });
-            return;
-            console.log("items", items);
         });
-        console.log("ok:",contextMenu);
-        console.log("ok2:",items);
-        console.log("context",contextMenu.append(items));
-        console.log(contextMenu);
+        document.addEventListener('click', () => contextMenu.style.display = "none");
     }
 
     handleOptionClick(optionId) {
-            if(optionId !== "newFolder") return;
+        if (optionId !== "newFolder") return;
 
         this.dropdownConfig.style.display = "none";
         // console.log("Before Render Folder");
@@ -121,5 +233,5 @@ class ToolbarController {
 
 const toolbarController = new ToolbarController();
 toolbarController.renderDropdown();
-toolbarController.openFolderMenu();
+toolbarController.openFolderMenu(document.querySelector("#contentGrid"));
 export default toolbarController;

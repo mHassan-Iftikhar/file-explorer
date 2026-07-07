@@ -1,13 +1,13 @@
 import store from "./storageBase.js";
-import { FolderRenderer, UI } from "./uiComponents.js";
+import { folderRenderer, ui } from "./uiComponents.js";
 
 class SearchController {
     #searchField = document.querySelector("#command-bar-search");
     #storage = store;
-    #folderRenderer = new FolderRenderer();
+    #folderRenderer = folderRenderer;
     #debounceDelay = 300;
-    #ui = new UI();
-    
+    #ui = ui;
+
     constructor(storage = this.#storage, folderRenderer = this.#folderRenderer, debounceDelay = this.#debounceDelay, ui = this.#ui) {
         this.storage = storage;
         this.folderRenderer = folderRenderer;
@@ -24,6 +24,11 @@ class SearchController {
     handleSearch(query) {
         // console.log("Search query:", query);
         if (!query.trim()) {
+            // const noSearch = this.storage.getData("folders");
+            // noSearch.forEach((item) => {
+            //     const container = document.getElementById("contentGrid");
+            //     container.append(this.folderRenderer.renderItem(item));
+            // })
             return;
         }
 
@@ -37,8 +42,7 @@ class SearchController {
     displayResults(items) {
         // console.log("Displaying results:", items);
         this.ui.clear();
-        if(!items || items.length === 0) {
-            this.#ui.container.textAlign = "center";
+        if (!items || items.length === 0) {
             this.ui.container.textContent = "No results found.";
             return;
         }

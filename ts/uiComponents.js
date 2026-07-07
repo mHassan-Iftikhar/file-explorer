@@ -9,13 +9,13 @@ class UIComponents {
         this.fileManager = fileManager;
     }
 
-    container(containerSelecter) {
-        this.#container = document.querySelector(containerSelecter);
+    // container(containerSelecter) {
+    //     this.#container = document.querySelector(containerSelecter);
 
-        if (!this.#container) {
-            console.error(`Container element not found for selector: ${containerSelecter}`);
-        }
-    }
+    //     if (!this.#container) {
+    //         console.error(`Container element not found for selector: ${containerSelecter}`);
+    //     }
+    // }
 
     render() {
         throw new Error("Method 'render()' must be implemented.");
@@ -57,6 +57,9 @@ class FolderRenderer extends UIComponents {
         icon.textContent = item.type === "file" ? "📄" : "📁";
         const name = this.createElement("div", "folder-item__name");
         name.textContent = item.name;
+        name.style.backgroundColor = 'transparent';
+        name.style.color = 'white';
+        name.style.border = 'none';
         div.append(icon, name);
         this.container?.append(div);
     }
@@ -113,7 +116,7 @@ class FolderRenderer extends UIComponents {
             this.render();
         };
 
-        const cancelAndCleanUp = () => {
+        function cancelAndCleanUp() {
             if (isSaved) return;
             isSaved = true;
             folderItem.remove();

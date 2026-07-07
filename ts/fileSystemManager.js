@@ -2,8 +2,8 @@ import store from "./storageBase.js";
 
 class FileSystemManager {
 
-    constructor(storage) {
-        this.storage = storage;
+    constructor() {
+        this.storage = store;
         this.currentFolderId = null;
     }
 
@@ -48,14 +48,14 @@ class FileSystemManager {
     }
 
     openFolder(id) {
-        this.currentFolderId = id;
+        this.currentFolderId = id ? Number(id) : null;
     }
 
     goBack() {
         if (this.currentFolderId === null) return;
 
         const allItems = this.#loadFolders();
-        const currentFolder = allItems.find(item => item.id === this.currentFolderId);
+        const currentFolder = this.findFolder(this.currentFolderId, allItems);
 
         this.currentFolderId = currentFolder ? currentFolder.parentId : null;
     }
@@ -63,6 +63,7 @@ class FileSystemManager {
     createFolder(id = Date.now(), name = "New Folder", parentId = this.currentFolderId) {
         const folders = this.#loadFolders();
         const folderId = Number(id);
+        const targetParentId = parentId ? Number(parentId) : null;
         const normalizedName = String(name ?? "").trim() || "New Folder";
         const uniqueName = this.doesNameExist(normalizedName) ? this.getUniqueName(normalizedName) : normalizedName;
         const newFolder = {
@@ -88,9 +89,10 @@ class FileSystemManager {
 
     renameFolder(id, newName) {
         const folders = this.#loadFolders();
-        const folder = this.findFolder(id, folders);
+        const folderId = Number(id);
+        const folder = this.findFolder(folderId, folders);
 
-        if (folder) {
+        if (folder.id === id) {
             folder.name = newName;
             this.#saveFolders(folders);
             return folder;
@@ -101,7 +103,8 @@ class FileSystemManager {
 
     deleteFolder(id) {
         const folders = this.#loadFolders();
-        const deleted = this.removeFolder(id, folders);
+        const folderId = Number(id);
+        const deleted = this.removeFolder(folderId, folders);
 
         if (deleted) {
             this.#saveFolders(folders);
@@ -114,7 +117,8 @@ class FileSystemManager {
     }
 
     removeFolder(id, folders) {
-        const index = folders.findIndex((f) => f.id === id);
+        const targetId = Number(id);
+        const index = folders.findIndex((f) => f.id === targetId);
 
         if (index !== -1) {
             folders.splice(index, 1);
@@ -122,7 +126,7 @@ class FileSystemManager {
         }
 
         for (const folder of folders) {
-            if (folder.subFolders?.length && this.removeFolder(id, folder.subFolders)) {
+            if (folder.subFolders?.length && this.removeFolder(targetId, folder.subFolders)) {
                 return true;
             }
         }
@@ -131,12 +135,12 @@ class FileSystemManager {
     }
 
     findFolder(id, folders) {
-
+        const targetId = Number(id);
         for (const folder of folders) {
-            if (folder.id === id) return folder;
+            if (folder.id === targetId) return folder;
 
             if (folder.subFolders?.length) {
-                const result = this.findFolder(id, folder.subFolders);
+                const result = this.findFolder(targetId, folder.subFolders);
                 if (result) return result;
             }
         }
@@ -167,38 +171,5 @@ class FileSystemManager {
     }
 }
 
-class Folder extends FileSystemManager {
-    #subItems
-
-    constructor(subItems, name, id, parentId) {
-        super(name, id, parentId);
-        this.#subItems = subItems;
-    }
-
-    getIcon() {
-        return "📁";
-    }
-
-    getSubItem() {
-        return this.#subItems;
-    }
-
-    removeSubItem(item) {
-        this.#subItems = this.#subItems.filter((subItem) => subItem.getId() !== item.getId());
-    }
-
-    addSubItem(item) {
-        this.#subItems.push(item);
-    }
-
-    removeSubItem(id) {
-        const item = this.#subItems.find((item) => item.getId() === id);
-
-        if (!item) return false;
-        this.#subItems = this.#subItems.filter((item) => item.getId() !== id);
-        return true;
-    }
-}
-
-const fileManager = new FileSystemManager(store);
+const fileManager = new FileSystemManager();
 export default fileManager;

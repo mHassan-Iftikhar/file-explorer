@@ -25,7 +25,16 @@ class LocalStorageService extends StorageBase {
 
     getData(key) {
         const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : [];
+        if (!data || data === "undefined") {
+            return null;
+        }
+
+        try {
+            return JSON.parse(data);
+        } catch (error) {
+            console.error("Corrupted JSON found in localStorage:", error);
+            return null;
+        }
     }
 
     saveData(key, data) {

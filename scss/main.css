@@ -620,7 +620,7 @@
     background-color: rgba(255, 255, 255, 0.1); }
   #folder-item .folder-item__name {
     font-size: 14px; }
-  #folder-item #context-menu {
+  #folder-item .context-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -636,10 +636,10 @@
     z-index: 99999;
     color: #dfdfdf;
     overflow: hidden; }
-    #folder-item #context-menu .menu-item {
+    #folder-item .context-menu .menu-item {
       padding: 10px; }
-      #folder-item #context-menu .menu-item:hover {
-        background-color: #313131;
+      #folder-item .context-menu .menu-item:hover {
+        background-color: #313131b9;
         cursor: pointer; }
 
 main {
