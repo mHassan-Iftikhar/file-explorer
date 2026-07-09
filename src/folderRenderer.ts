@@ -1,58 +1,24 @@
-import fileManager  from "./fileSystemManager.js";
+import { FileSystemManager as fileManager } from "./fileSystemManager.js";
+import { UIComponents } from "./uiComponents.js";
+import { Labels, Selectors } from "./constants.js";
+import type { FolderItem } from "./types.js";
+import type { SortDirection, FilterMode } from "./types.js";
 
-class UIComponents {
-    #container = document.querySelector("#contentGrid");
-    #fileManager = fileManager;
+export class FolderRenderer extends UIComponents {
 
-    constructor(container = this.#container, fileManager = this.#fileManager) {
-        this.#container = container;
-        this.fileManager = fileManager;
-    }
-
-    // container(containerSelecter) {
-    //     this.#container = document.querySelector(containerSelecter);
-
-    //     if (!this.#container) {
-    //         console.error(`Container element not found for selector: ${containerSelecter}`);
-    //     }
-    // }
-
-    render() {
-        throw new Error("Method 'render()' must be implemented.");
-    }
-
-    clear() {
-        if (this.#container) {
-            this.#container.innerHTML = '';
-        }
-    }
-
-    get container() {
-        return this.#container;
-    }
-
-    createElement(tag, className) {
-        const element = document.createElement(tag);
-        if (className) element.className = className;
-        return element;
-    }
-}
-
-class FolderRenderer extends UIComponents {
-    
     #fileSystemManager = fileManager;
-    #viewMode = 'grid';
-    #sortDirection = 'asc';
-    #fileMode = 'all';
+    #viewMode: string = 'grid';
+    #sortDirection: SortDirection = 'asc';
+    #fileMode: FilterMode = 'all';
 
-    constructor(containerSelecter, fileSystemManager) {
+    constructor(containerSelecter?: HTMLElement | null, fileSystemManager?: typeof fileManager) {
         super(containerSelecter);
         this.#fileSystemManager = fileSystemManager ?? this.#fileSystemManager;
     }
 
-    renderItem(item) {
+    renderItem(item: FolderItem) {
         const div = this.createElement("div", "folder-item");
-        div.id = item.id;
+        div.id = String(item.id);
         const icon = this.createElement("div", "folder-item__icon");
         icon.textContent = item.type === "file" ? "📄" : "📁";
         const name = this.createElement("div", "folder-item__name");
@@ -64,12 +30,12 @@ class FolderRenderer extends UIComponents {
         this.container?.append(div);
     }
 
-    render() {
+    override render() {
         if (!this.container) return;
 
         this.clear();
 
-        let items = this.#fileSystemManager.getCurrentChildren();
+        const items = this.#fileSystemManager.getCurrentChildren();
         items.forEach((item) => {
             this.renderItem(item);
         });
@@ -78,7 +44,7 @@ class FolderRenderer extends UIComponents {
     renderNewFolder() {
         if (!this.container) return;
 
-        const activeInput = this.container.querySelector(".folder-item__rename-input");
+        const activeInput = this.container.querySelector<HTMLInputElement>(Selectors.FOLDER_RENAME_INPUT);
         if (activeInput) {
             activeInput.focus();
             activeInput.select();
@@ -86,7 +52,7 @@ class FolderRenderer extends UIComponents {
         }
 
         const folderItem = this.createElement("div", "folder-item");
-        const defaultName = "New Folder";
+        const defaultName = Labels.NEW_FOLDER;
 
         folderItem.innerHTML = `
             <div class="folder-item__icon">📁</div>
@@ -99,7 +65,8 @@ class FolderRenderer extends UIComponents {
 
         this.container.appendChild(folderItem);
 
-        const input = folderItem.querySelector(".folder-item__rename-input");
+        const input = folderItem.querySelector(Selectors.FOLDER_RENAME_INPUT) as HTMLInputElement;
+        if (!input) return;
         input.focus();
         input.select();
 
@@ -120,9 +87,9 @@ class FolderRenderer extends UIComponents {
             if (isSaved) return;
             isSaved = true;
             folderItem.remove();
-        };
+        }
 
-        input.addEventListener("keydown", (e) => {
+        input.addEventListener("keydown", (e: KeyboardEvent) => {
             if (e.key === "Enter") {
                 e.preventDefault();
                 saveAndCleanUp();
@@ -137,12 +104,13 @@ class FolderRenderer extends UIComponents {
         });
     }
 
-    renameItem(itemId) {
-        const item = this.container.querySelector(`#${itemId}`);
-        return item;
+    renameItem(itemId: string): HTMLElement | null {
+        const item = this.container?.querySelector<HTMLElement>(`#${itemId}`);
+        return item ?? null;
     }
 
-    setViewMode(mode) {
+    setViewMode(mode: string) {
+        if (!this.container) return;
         if (mode === "list") {
             this.container.style.gridTemplateColumns = "1fr";
         } else {
@@ -150,7 +118,7 @@ class FolderRenderer extends UIComponents {
         }
     }
 
-    setSortDirection(dir) {
+    setSortDirection(dir: SortDirection) {
         if (dir === "asc") {
             this.#sortDirection = "asc";
             return;
@@ -159,15 +127,21 @@ class FolderRenderer extends UIComponents {
         this.#sortDirection = "desc";
     }
 
-    setFilterMode(mode) {
+    setFilterMode(mode: FilterMode) {
         if (mode === 'all') {
-            this.render()
+            this.render();
         } else {
-            this.render(this.#fileSystemManager.getCurrentChildren().filter(item => item.constructor.name === mode))
+            const filtered = this.#fileSystemManager.getCurrentChildren().filter((item) => {
+                if (mode === 'files') return item.type === 'file' || item.type === 'document';
+                if (mode === 'folders') return item.type === 'folder';
+                return true;
+            });
+            this.clear();
+            filtered.forEach(item => this.renderItem(item));
         }
     }
 
-    applySort(items) {
+    applySort(items: FolderItem[]) {
         if (this.#sortDirection === "asc") {
             items.sort((a, b) => a.name.localeCompare(b.name));
         } else {
@@ -177,19 +151,14 @@ class FolderRenderer extends UIComponents {
         return items;
     }
 
-    applFilter(items) {
+    applyFilter(items: FolderItem[]) {
         switch (this.#fileMode) {
             case 'files':
-                return items.filter(item => item instanceof File);
+                return items.filter(item => item.type === "file");
             case 'folders':
-                return items.filter(item => item instanceof Folder);
+                return items.filter(item => item.type === "folder");
             default:
                 return items;
         }
     }
 }
-
-const folderRenderer = new FolderRenderer();
-const ui = new UIComponents();
-
-export { UIComponents as UI, FolderRenderer, folderRenderer, ui };

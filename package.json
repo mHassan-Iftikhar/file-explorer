@@ -8,9 +8,24 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch-css": "sass --watch scss/main.scss css/main.css"
+    "watch-css": "sass --watch scss/main.scss css/main.css",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "tsc --watch & sass --watch scss/main.scss css/main.css"
   },
   "dependencies": {
     "scss": "^0.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mHassan-Iftikhar/file-explorer.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mHassan-Iftikhar/file-explorer/issues"
+  },
+  "homepage": "https://github.com/mHassan-Iftikhar/file-explorer#readme",
+  "devDependencies": {
+    "typescript": "^6.0.3"
   }
 }
